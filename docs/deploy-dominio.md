@@ -10,23 +10,13 @@ Site estático pronto para GitHub Pages ou qualquer hospedagem de arquivos está
 
 ## 2. Publicar no GitHub Pages
 
-```bash
-cd /home/tiago/Development/ladingpages/meu-site
-git init
-git add .
-git commit -m "Hub comercial Tiago Farias"
-git branch -M main
-git remote add origin git@github.com:tofariasti/tiagofarias.com.br.git
-git push -u origin main
-```
+Repositório: **https://github.com/tofariasti/meu-site** (público — obrigatório no plano gratuito).
 
-No repositório GitHub:
+O deploy é automático via GitHub Actions (`.github/workflows/deploy-pages.yml`) a cada push na `main`.
 
-1. **Settings → Pages**
-2. Source: **Deploy from branch** → branch `main` → pasta `/ (root)`
-3. Salvar e aguardar o deploy (alguns minutos).
+URL publicada: **https://tofariasti.github.io/meu-site/**
 
-O arquivo [`CNAME`](../CNAME) na raiz já aponta para `tiagofarias.com.br`.
+Quando o DNS do domínio estiver configurado (passo 3), copie `docs/CNAME.example` para `CNAME` na raiz, faça commit/push e adicione `tiagofarias.com.br` em **Settings → Pages → Custom domain**.
 
 ## 3. Configurar DNS (Registro.br)
 
