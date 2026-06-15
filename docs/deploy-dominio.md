@@ -1,6 +1,6 @@
 # Publicar fariasdigital.com.br
 
-Site estático pronto para GitHub Pages ou qualquer hospedagem de arquivos estáticos.
+Site estático publicado em **https://fariasdigital.com.br/** via GitHub Pages (domínio customizado).
 
 ## 1. Registrar o domínio
 
@@ -14,9 +14,10 @@ Repositório: **https://github.com/tofariasti/meu-site** (público — obrigató
 
 O deploy é automático via GitHub Actions (`.github/workflows/deploy-pages.yml`) a cada push na `main`.
 
-URL publicada: **https://tofariasti.github.io/meu-site/**
+URL principal: **https://fariasdigital.com.br/**  
+Espelho GitHub Pages: **https://tofariasti.github.io/meu-site/**
 
-O arquivo `CNAME` na raiz já contém `fariasdigital.com.br`. Após configurar o DNS (passo 3), adicione o domínio em **Settings → Pages → Custom domain** no GitHub (se ainda não estiver).
+O arquivo `CNAME` na raiz contém `fariasdigital.com.br`. O domínio customizado deve estar configurado em **Settings → Pages → Custom domain** no GitHub.
 
 ## 3. Configurar DNS (Registro.br)
 

@@ -2,8 +2,8 @@
 
 Site hub para prospecção local: **sites/e-commerce** + **captação aérea** (TechDrone360).
 
-**Site publicado:** [tofariasti.github.io/meu-site](https://tofariasti.github.io/meu-site/)  
-**Domínio alvo:** [fariasdigital.com.br](https://fariasdigital.com.br) (após configurar DNS)  
+**Site publicado:** [fariasdigital.com.br](https://fariasdigital.com.br/)  
+**Espelho GitHub Pages:** [tofariasti.github.io/meu-site](https://tofariasti.github.io/meu-site/)  
 **Repositório:** [github.com/tofariasti/meu-site](https://github.com/tofariasti/meu-site)  
 **WhatsApp:** (51) 98903-0405
 
@@ -50,7 +50,7 @@ Edite [`assets/js/config.js`](assets/js/config.js):
 
 Instruções completas em [`docs/deploy-dominio.md`](docs/deploy-dominio.md).
 
-Resumo: push na `main` publica automaticamente em **https://tofariasti.github.io/meu-site/** via GitHub Actions.
+Resumo: push na `main` publica automaticamente via GitHub Actions. O site principal fica em **https://fariasdigital.com.br/** (domínio customizado no GitHub Pages).
 
 ## Testar localmente
 

@@ -3,6 +3,15 @@
 
   if (typeof HubConfig === 'undefined') return;
 
+  function getDominioHost() {
+    if (HubConfig.dominioHost) return HubConfig.dominioHost;
+    return (HubConfig.dominio || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
+  }
+
+  function getDominioUrl() {
+    return HubConfig.dominio || ('https://' + getDominioHost());
+  }
+
   function buildWhatsAppUrl(key) {
     const msg = HubConfig.mensagensWhatsApp[key] || HubConfig.mensagensWhatsApp.geral;
     return 'https://wa.me/' + HubConfig.whatsappNumero + '?text=' + encodeURIComponent(msg);
@@ -34,6 +43,17 @@
 
   document.querySelectorAll('[data-region]').forEach(function (el) {
     el.textContent = HubConfig.cidadeRegiao;
+  });
+
+  document.querySelectorAll('[data-dominio]').forEach(function (el) {
+    el.textContent = getDominioHost();
+  });
+
+  document.querySelectorAll('[data-dominio-link]').forEach(function (el) {
+    el.setAttribute('href', getDominioUrl());
+    if (el.hasAttribute('data-dominio') || !el.textContent.trim()) {
+      el.textContent = getDominioHost();
+    }
   });
 
   document.querySelectorAll('[data-year]').forEach(function (el) {
@@ -112,7 +132,7 @@
         actionsHtml = '';
       }
     } else {
-      var waMsg = 'Olá! Vi o modelo de site para ' + demo.titulo + ' no fariasdigital.com.br e quero algo assim para minha empresa.';
+      var waMsg = 'Olá! Vi o modelo de site para ' + demo.titulo + ' em ' + getDominioHost() + ' e quero algo assim para minha empresa.';
       var waUrl = 'https://wa.me/' + HubConfig.whatsappNumero + '?text=' + encodeURIComponent(waMsg);
       actionsHtml =
         '<a href="' + demo.url + '" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver modelo</a>' +

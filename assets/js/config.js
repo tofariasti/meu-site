@@ -2,10 +2,15 @@
  * Farias Digital — Hub comercial
  * Configuração central: WhatsApp, pacotes, demos e domínio
  */
+const HUB_DOMINIO = 'https://fariasdigital.com.br';
+const HUB_DOMINIO_HOST = 'fariasdigital.com.br';
+
 const HubConfig = {
   nome: 'Tiago Farias',
+  marca: 'Farias Digital',
   nomeCompleto: 'Tiago O. de Farias',
-  dominio: 'https://fariasdigital.com.br',
+  dominio: HUB_DOMINIO,
+  dominioHost: HUB_DOMINIO_HOST,
   cidadeRegiao: 'Porto Alegre e região metropolitana',
   email: 'tiago.farias.poa@gmail.com',
   whatsappNumero: '5551989030405',
@@ -16,8 +21,8 @@ const HubConfig = {
   googleAnalyticsId: '',
 
   mensagensWhatsApp: {
-    geral: 'Olá! Vi o site fariasdigital.com.br e gostaria de conversar sobre um projeto.',
-    site: `Olá! Vi o site fariasdigital.com.br e quero orçamento.
+    geral: `Olá! Vi o site ${HUB_DOMINIO_HOST} e gostaria de conversar sobre um projeto.`,
+    site: `Olá! Vi o site ${HUB_DOMINIO_HOST} e quero orçamento.
 
 Para agilizar, já tenho:
 • Tipo de negócio:
@@ -27,7 +32,7 @@ Para agilizar, já tenho:
 • Prazo desejado:
 
 Obrigado!`,
-    drone: `Olá! Vi o site fariasdigital.com.br e quero orçamento de captação com drone.
+    drone: `Olá! Vi o site ${HUB_DOMINIO_HOST} e quero orçamento de captação com drone.
 
 Para agilizar:
 • Tipo: (imóvel / Airbnb / obra / evento / empresa / outro)
@@ -203,6 +208,6 @@ Obrigado!`,
     { passo: '1', titulo: 'Conversa rápida', texto: 'Você conta seu negócio e objetivo pelo WhatsApp — sem compromisso.' },
     { passo: '2', titulo: 'Proposta clara', texto: 'Envio escopo, prazo e investimento fechados, sem surpresas.' },
     { passo: '3', titulo: 'Desenvolvimento', texto: 'Montagem do site com foco em gerar contato e credibilidade.' },
-    { passo: '4', titulo: 'Publicação', texto: 'Site no ar, com orientação para domínio e Google Meu Negócio.' },
+    { passo: '4', titulo: 'Publicação', texto: 'Site no ar no seu domínio (ex.: .com.br), com orientação para Google Meu Negócio.' },
   ],
 };
