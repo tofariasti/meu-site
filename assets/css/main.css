@@ -2322,3 +2322,58 @@ a:hover { color: var(--color-accent); }
   .ambient__cursor,
   .ambient__particles { display: none; }
 }
+
+/* FAQ — SEO + rich snippets */
+.faq-list {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faq-item[open] {
+  border-color: rgba(0, 229, 255, 0.25);
+}
+
+.faq-item__question {
+  padding: 1.1rem 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+  color: var(--color-text);
+}
+
+.faq-item__question::-webkit-details-marker { display: none; }
+
+.faq-item__question::after {
+  content: '+';
+  float: right;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-primary);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-item__question::after {
+  content: '−';
+}
+
+.faq-item__answer {
+  margin: 0;
+  padding: 0 1.25rem 1.15rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}

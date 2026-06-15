@@ -210,4 +210,78 @@ Obrigado!`,
     { passo: '3', titulo: 'Desenvolvimento', texto: 'Montagem do site com foco em gerar contato e credibilidade.' },
     { passo: '4', titulo: 'Publicação', texto: 'Site no ar no seu domínio (ex.: .com.br), com orientação para Google Meu Negócio.' },
   ],
+
+  seo: {
+    ogImage: HUB_DOMINIO + '/assets/img/og-image.png',
+    descriptionDefault: 'Sites, e-commerce, automação de WhatsApp e imagens aéreas com drone em Porto Alegre e região. MEI com Nota Fiscal.',
+    geo: {
+      region: 'BR-RS',
+      placename: 'Porto Alegre',
+      latitude: -30.0346,
+      longitude: -51.2177,
+    },
+    local: {
+      cidade: 'Porto Alegre',
+      uf: 'RS',
+      areaServed: [
+        'Porto Alegre',
+        'Canoas',
+        'Novo Hamburgo',
+        'Gravataí',
+        'Cachoeirinha',
+        'Viamão',
+        'Alvorada',
+        'São Leopoldo',
+        'Esteio',
+        'Sapucaia do Sul',
+      ],
+    },
+    sameAs: [
+      'https://www.linkedin.com/in/tiagofarias/',
+      'https://github.com/tofariasti',
+      'https://techdrone360.com.br',
+      'https://www.instagram.com/techdrone360/',
+      'https://www.youtube.com/@techdrone360',
+    ],
+    paginas: {
+      home: {
+        title: 'Farias Digital | Sites, E-commerce e Drone em Porto Alegre',
+        description: 'Criação de sites, lojas online, automação de WhatsApp e fotos aéreas com drone para empresas em Porto Alegre e região. MEI · Nota Fiscal · Orçamento grátis.',
+      },
+      sites: {
+        title: 'Criação de Sites e Loja Online em Porto Alegre | Farias Digital',
+        description: 'Sites profissionais, landing pages e e-commerce a partir de R$ 1.490. Automação de WhatsApp, SEO básico e layout mobile. Porto Alegre e região metropolitana.',
+      },
+      drone: {
+        title: 'Drone para Imóveis e Empresas em Porto Alegre | Farias Digital',
+        description: 'Fotos e vídeos aéreos 4K com drone DJI para imóveis, Airbnb, obras e eventos. A partir de R$ 650. Nota Fiscal. Porto Alegre e região.',
+      },
+      sobre: {
+        title: 'Sobre a Farias Digital | Tiago Farias — MEI, Porto Alegre',
+        description: 'Tiago Farias — desenvolvedor web e operador de drone certificado em Porto Alegre. Mais de 10 anos em sistemas web. MEI com emissão de Nota Fiscal.',
+      },
+    },
+    faq: [
+      {
+        pergunta: 'Quanto custa um site profissional em Porto Alegre?',
+        resposta: 'Os pacotes começam em R$ 1.490 (Presença Digital — landing page com WhatsApp) e R$ 2.990 (Loja Essencial — e-commerce com até 50 produtos). Projetos com pagamento online, integrações ou automação avançada são orçados sob medida.',
+      },
+      {
+        pergunta: 'A Farias Digital emite nota fiscal?',
+        resposta: 'Sim. Sou MEI (Microempreendedor Individual) e emito Nota Fiscal para pessoa física e jurídica — ideal para empresas que precisam de documentação formal.',
+      },
+      {
+        pergunta: 'Quanto tempo leva para colocar meu site no ar?',
+        resposta: 'Landing pages e sites institucionais costumam ficar prontos em 7 a 15 dias úteis, dependendo do escopo e da agilidade no envio de textos e fotos. Prazo exato vem fechado na proposta.',
+      },
+      {
+        pergunta: 'Você atende cidades além de Porto Alegre?',
+        resposta: 'Sim. Atendo Porto Alegre e região metropolitana — Canoas, Novo Hamburgo, Gravataí, Cachoeirinha, Viamão, Alvorada, São Leopoldo e cidades próximas. Para drone, deslocamento fora da região pode alterar o valor.',
+      },
+      {
+        pergunta: 'O site aparece no Google?',
+        resposta: 'Todos os pacotes incluem SEO básico: título, descrição, URLs amigáveis e configuração para indexação. Também oriento sobre Google Meu Negócio e Search Console para acelerar a presença local.',
+      },
+    ],
+  },
 };
