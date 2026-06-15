@@ -3,8 +3,8 @@
 Site hub para prospecção local: **sites/e-commerce** + **captação aérea** (TechDrone360).
 
 **Site publicado:** [fariasdigital.com.br](https://fariasdigital.com.br/)  
-**Espelho GitHub Pages:** [tofariasti.github.io/meu-site](https://tofariasti.github.io/meu-site/)  
-**Repositório:** [github.com/tofariasti/meu-site](https://github.com/tofariasti/meu-site)  
+**Espelho GitHub Pages:** [tofariasti.github.io/fariasdigital.com.br](https://tofariasti.github.io/fariasdigital.com.br/)  
+**Repositório:** [github.com/tofariasti/fariasdigital.com.br](https://github.com/tofariasti/fariasdigital.com.br)  
 **WhatsApp:** (51) 98903-0405
 
 ## Páginas
@@ -19,7 +19,7 @@ Site hub para prospecção local: **sites/e-commerce** + **captação aérea** (
 ## Estrutura
 
 ```
-meu-site/
+fariasdigital.com.br/
 ├── index.html
 ├── sites/index.html
 ├── drone/index.html
@@ -55,7 +55,7 @@ Resumo: push na `main` publica automaticamente via GitHub Actions. O site princi
 ## Testar localmente
 
 ```bash
-cd /home/tiago/Development/ladingpages/meu-site
+cd /home/tiago/Development/ladingpages/fariasdigital.com.br
 python3 -m http.server 8888
 ```
 
