@@ -116,7 +116,7 @@
     var isProjeto = tipo === 'projeto';
     var cfg = HubConfig.portfolio || {};
     var delay = (i % 3) + 1;
-    var badge = demo.badge || (isProjeto ? (cfg.badgeProjeto || 'Projeto próprio') : (cfg.badgeDemo || 'Modelo — personalizável'));
+    var badge = demo.badge || (isProjeto ? (cfg.badgeProjeto || 'Em produção') : (cfg.badgeDemo || 'Pronto para personalizar'));
     var hasIframe = demo.preview !== false && demo.url && demo.url.indexOf('github.com') === -1;
     var previewHtml;
 
@@ -144,10 +144,10 @@
         actionsHtml = '';
       }
     } else {
-      var waMsg = 'Olá! Vi o modelo de site para ' + demo.titulo + ' em ' + getDominioHost() + ' e quero algo assim para minha empresa.';
+      var waMsg = 'Olá! Vi o site para ' + demo.titulo + ' em ' + getDominioHost() + ' e quero algo assim para minha empresa.';
       var waUrl = 'https://wa.me/' + HubConfig.whatsappNumero + '?text=' + encodeURIComponent(waMsg);
       actionsHtml =
-        '<a href="' + demo.url + '" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver modelo</a>' +
+        '<a href="' + demo.url + '" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver site</a>' +
         '<a href="' + waUrl + '" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Quero um assim</a>';
     }
 
@@ -170,9 +170,15 @@
   if (HubConfig.portfolio) {
     var p = HubConfig.portfolio;
     document.querySelectorAll('[data-portfolio-lead]').forEach(function (el) { el.textContent = p.lead; });
-    document.querySelectorAll('[data-portfolio-nota]').forEach(function (el) {
-      el.innerHTML = '<strong>Transparência:</strong> ' + p.nota.replace(/^Transparência:\s*/i, '');
-    });
+    if (p.nota) {
+      document.querySelectorAll('[data-portfolio-nota]').forEach(function (el) {
+        el.innerHTML = p.nota;
+      });
+    } else {
+      document.querySelectorAll('[data-portfolio-nota]').forEach(function (el) {
+        el.remove();
+      });
+    }
     if (p.grupoProjetos) {
       document.querySelectorAll('[data-portfolio-grupo-projetos-titulo]').forEach(function (el) { el.textContent = p.grupoProjetos.titulo; });
       document.querySelectorAll('[data-portfolio-grupo-projetos-lead]').forEach(function (el) { el.textContent = p.grupoProjetos.lead; });

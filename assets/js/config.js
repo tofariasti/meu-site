@@ -122,17 +122,16 @@ Obrigado!`,
     titulo: 'Veja o que posso construir',
     tituloHighlight: 'para o seu negócio',
     lead: 'Referências de layout, código e experiência no celular — para você avaliar a qualidade antes de pedir orçamento.',
-    nota: 'Transparência: os modelos por segmento usam marcas fictícias. Os demais itens são projetos que desenvolvi por conta própria — não são cases de clientes pagantes.',
     grupoProjetos: {
-      titulo: 'Desenvolvimento próprio',
-      lead: 'Sites e aplicações que criei para mostrar minha stack — incluindo meu serviço de drone.',
+      titulo: 'Projetos em produção',
+      lead: 'Sites e aplicações web que desenvolvi — incluindo meu serviço de captação aérea.',
     },
     grupoDemos: {
-      titulo: 'Modelos por segmento',
-      lead: 'Landing pages de referência. Ao contratar, o site sai com a marca, textos e fotos da sua empresa.',
+      titulo: 'Sites por segmento',
+      lead: 'Landing pages prontas para você ver layout e responsividade. Ao contratar, adapto com a marca, textos e fotos da sua empresa.',
     },
-    badgeProjeto: 'Projeto próprio',
-    badgeDemo: 'Modelo — personalizável',
+    badgeProjeto: 'Em produção',
+    badgeDemo: 'Pronto para personalizar',
   },
 
   projetos: [
