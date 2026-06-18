@@ -212,6 +212,12 @@ Obrigado!`,
       url: 'https://tofariasti.github.io/advogado-landing-page/site/',
       descricao: 'Áreas de atuação, consulta online e WhatsApp.',
     },
+    {
+      titulo: 'Consultório Odontológico',
+      segmento: 'Saúde',
+      url: 'https://tofariasti.github.io/landing-dentista/site/',
+      descricao: 'Serviços, depoimentos, antes/depois e agendamento pelo WhatsApp.',
+    },
   ],
 
   processoWeb: [
