@@ -206,6 +206,12 @@ Obrigado!`,
       url: 'https://tofariasti.github.io/radiadores-vitoria/site/',
       descricao: 'Serviços, orçamento e localização.',
     },
+    {
+      titulo: 'Escritório de Advocacia',
+      segmento: 'Serviços jurídicos',
+      url: 'https://tofariasti.github.io/advogado-landing-page/site/',
+      descricao: 'Áreas de atuação, consulta online e WhatsApp.',
+    },
   ],
 
   processoWeb: [
