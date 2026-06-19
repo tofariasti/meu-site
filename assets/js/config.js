@@ -219,6 +219,12 @@ Obrigado!`,
       descricao: 'Serviços automotivos especializados, agendamento online e orçamento via WhatsApp.',
     },
     {
+      titulo: 'Montador de Móveis',
+      segmento: 'Serviços',
+      url: 'https://tofariasti.github.io/montadormoveis/',
+      descricao: 'Montagem profissional, orçamento via WhatsApp e galeria de trabalhos realizados.',
+    },
+    {
       titulo: 'Escritório de Advocacia',
       segmento: 'Serviços',
       url: 'https://tofariasti.github.io/advogado-landing-page/',
