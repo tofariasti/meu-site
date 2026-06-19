@@ -171,6 +171,12 @@ Obrigado!`,
 
   demos: [
     {
+      titulo: 'CRM Pro',
+      segmento: 'Gestão empresarial',
+      url: 'https://tofariasti.github.io/crm/site/',
+      descricao: 'Dashboard interativo com gráficos, métricas e integração WhatsApp para gestão de clientes.',
+    },
+    {
       titulo: 'Pet shop',
       segmento: 'Serviços locais',
       url: 'https://tofariasti.github.io/amo-patas/site/',
