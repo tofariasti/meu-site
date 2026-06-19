@@ -242,6 +242,12 @@ Obrigado!`,
       url: 'https://tofariasti.github.io/ecommerce/',
       descricao: 'Loja virtual completa com produtos, categorias, ofertas, depoimentos e pedidos via WhatsApp.',
     },
+    {
+      titulo: 'Catálogo Digital',
+      segmento: 'E-commerce',
+      url: 'https://tofariasti.github.io/catalogo-digital/',
+      descricao: 'Catálogo de produtos premium com filtros por categoria, animações suaves e integração WhatsApp.',
+    },
   ],
 
   processoWeb: [
