@@ -218,6 +218,12 @@ Obrigado!`,
       url: 'https://tofariasti.github.io/landing-dentista/site/',
       descricao: 'Serviços, depoimentos, antes/depois e agendamento pelo WhatsApp.',
     },
+    {
+      titulo: 'Psicóloga',
+      segmento: 'Saúde e Bem-estar',
+      url: 'https://tofariasti.github.io/landing-page-psicologa/site/',
+      descricao: 'Terapias, especialidades, depoimentos e formulário WhatsApp com animações avançadas.',
+    },
   ],
 
   processoWeb: [
