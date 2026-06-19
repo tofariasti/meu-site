@@ -236,6 +236,12 @@ Obrigado!`,
       url: 'https://tofariasti.github.io/landing-imobiliaria/',
       descricao: 'Busca de imóveis, filtros, tour virtual e agendamento de visitas via WhatsApp.',
     },
+    {
+      titulo: 'ShopStyle E-commerce',
+      segmento: 'E-commerce',
+      url: 'https://tofariasti.github.io/ecommerce/',
+      descricao: 'Loja virtual completa com produtos, categorias, ofertas, depoimentos e pedidos via WhatsApp.',
+    },
   ],
 
   processoWeb: [
