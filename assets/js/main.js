@@ -460,21 +460,10 @@
         el.remove();
       });
     }
-    if (p.grupoProjetos) {
-      document.querySelectorAll('[data-portfolio-grupo-projetos-titulo]').forEach(function (el) { el.textContent = p.grupoProjetos.titulo; });
-      document.querySelectorAll('[data-portfolio-grupo-projetos-lead]').forEach(function (el) { el.textContent = p.grupoProjetos.lead; });
-    }
     if (p.grupoDemos) {
       document.querySelectorAll('[data-portfolio-grupo-demos-titulo]').forEach(function (el) { el.textContent = p.grupoDemos.titulo; });
       document.querySelectorAll('[data-portfolio-grupo-demos-lead]').forEach(function (el) { el.textContent = p.grupoDemos.lead; });
     }
-  }
-
-  var projetosRoot = document.getElementById('portfolio-projetos');
-  if (projetosRoot && HubConfig.projetos) {
-    projetosRoot.innerHTML = HubConfig.projetos.map(function (item, i) {
-      return renderPortfolioCard(item, i, 'projeto');
-    }).join('');
   }
 
   var portfolioDemosRoot = document.getElementById('portfolio-demos');

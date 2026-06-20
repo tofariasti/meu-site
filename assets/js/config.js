@@ -151,47 +151,12 @@ Obrigado!`,
     titulo: 'Veja o que posso construir',
     tituloHighlight: 'para o seu negócio',
     lead: 'Referências de layout, código e experiência no celular — para você avaliar a qualidade antes de pedir orçamento.',
-    grupoProjetos: {
-      titulo: 'Projetos em produção',
-      lead: 'Sites e aplicações web que desenvolvi — incluindo meu serviço de captação aérea.',
-    },
     grupoDemos: {
       titulo: 'Landing pages por segmento',
       lead: 'Modelos prontos para você ver layout e responsividade. Ao contratar, personalizo com a identidade da sua empresa — a partir de R$ 300,00.',
     },
-    badgeProjeto: 'Em produção',
     badgeDemo: 'Pronto para personalizar',
   },
-
-  projetos: [
-    {
-      titulo: 'IBGE Localidades',
-      segmento: 'React · TypeScript · API',
-      url: 'https://tofariasti.github.io/ibge-localidades/',
-      github: 'https://github.com/tofariasti/ibge-localidades',
-      descricao: 'Mapa interativo do Brasil consumindo a API de Localidades do IBGE — regiões, UFs e municípios.',
-      stack: ['React', 'Vite', 'TypeScript', 'Docker'],
-      badge: 'Projeto pessoal',
-    },
-    {
-      titulo: 'TechDrone360',
-      segmento: 'Landing page · SEO · Drone',
-      url: 'https://techdrone360.com.br',
-      github: 'https://github.com/tofariasti/techdrone360',
-      descricao: 'Meu site comercial de captação aérea — portfólio, vídeos, WhatsApp e SEO.',
-      stack: ['HTML', 'Tailwind', 'JavaScript'],
-      badge: 'Meu negócio',
-    },
-    {
-      titulo: 'CRM Pro',
-      segmento: 'Dashboard · Chart.js · WhatsApp',
-      url: 'https://tofariasti.github.io/crm/',
-      github: 'https://github.com/tofariasti/crm',
-      descricao: 'Dashboard interativo com métricas, funil de vendas, gráficos Chart.js e captura de leads via WhatsApp — demo publicada online.',
-      stack: ['HTML', 'CSS', 'JavaScript', 'Chart.js'],
-      badge: 'Projeto pessoal',
-    },
-  ],
 
   demos: [
     {
