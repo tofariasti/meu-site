@@ -138,36 +138,49 @@
   }
 
   function initCounters() {
-    var counters = document.querySelectorAll('[data-count]');
+    var counters = document.querySelectorAll('[data-count]:not([data-count-done])');
     if (!counters.length || prefersReduced) return;
+
+    function animateCounter(el) {
+      if (el.getAttribute('data-count-done')) return;
+      el.setAttribute('data-count-done', 'true');
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var suffix = el.getAttribute('data-count-suffix') || '';
+      var duration = 1800;
+      var start = 0;
+      var startTime = null;
+
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(start + (target - start) * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    }
 
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          var el = entry.target;
-          var target = parseInt(el.getAttribute('data-count'), 10);
-          var suffix = el.getAttribute('data-count-suffix') || '';
-          var duration = 1800;
-          var start = 0;
-          var startTime = null;
-
-          function tick(ts) {
-            if (!startTime) startTime = ts;
-            var progress = Math.min((ts - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(start + (target - start) * eased) + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
-          }
-
-          requestAnimationFrame(tick);
-          observer.unobserve(el);
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2, rootMargin: '0px 0px -5% 0px' }
     );
 
-    counters.forEach(function (el) { observer.observe(el); });
+    counters.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      var inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        animateCounter(el);
+      } else {
+        observer.observe(el);
+      }
+    });
   }
 
   function initTilt() {
@@ -340,6 +353,8 @@
       initTilt();
       initMagnetic();
       initStepsLine();
+      initCounters();
     },
+    refreshCounters: initCounters,
   };
 })();

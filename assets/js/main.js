@@ -12,6 +12,83 @@
     return HubConfig.dominio || ('https://' + getDominioHost());
   }
 
+  var ICON_COMPARISON_X =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  var ICON_COMPARISON_CHECK =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+  var ICON_COMPARISON_INSTAGRAM =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
+  var ICON_COMPARISON_MONITOR =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
+
+  function renderComparisonItems(items, type) {
+    return items.map(function (item) {
+      return (
+        '<li class="comparison-item comparison-item--' + type + '">' +
+          (type === 'bad' ? ICON_COMPARISON_X : ICON_COMPARISON_CHECK) +
+          '<div><strong>' + item.titulo + '</strong><p>' + item.texto + '</p></div>' +
+        '</li>'
+      );
+    }).join('');
+  }
+
+  function renderComparisonTable(instagramItems, siteItems) {
+    return (
+      '<div class="comparison-table" data-reveal data-reveal-delay="1">' +
+        '<div class="comparison-col comparison-col--danger">' +
+          '<div class="comparison-col__header">' +
+            ICON_COMPARISON_INSTAGRAM +
+            '<h3>Só Instagram</h3>' +
+            '<span class="comparison-tag comparison-tag--danger">Risco alto</span>' +
+          '</div>' +
+          '<ul class="comparison-list">' + renderComparisonItems(instagramItems, 'bad') + '</ul>' +
+        '</div>' +
+        '<div class="comparison-col comparison-col--success">' +
+          '<div class="comparison-col__header">' +
+            ICON_COMPARISON_MONITOR +
+            '<h3>Site Profissional</h3>' +
+            '<span class="comparison-tag comparison-tag--success">Controle total</span>' +
+          '</div>' +
+          '<ul class="comparison-list">' + renderComparisonItems(siteItems, 'good') + '</ul>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderComparativoStats(stats) {
+    return (
+      '<div class="stats-proof" data-reveal data-reveal-delay="1">' +
+        '<h3 class="stats-proof__title">Dados que comprovam:</h3>' +
+        '<div class="stats-proof__grid">' +
+          stats.map(function (s) {
+            return (
+              '<div class="stats-proof__item">' +
+                '<strong data-count="' + s.valor + '" data-count-suffix="' + s.sufixo + '">' + s.valor + s.sufixo + '</strong>' +
+                '<p>' + s.texto + '</p>' +
+                '<cite>' + s.fonte + '</cite>' +
+              '</div>'
+            );
+          }).join('') +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderComparativoQuote(quote) {
+    return (
+      '<div class="reality-box" data-reveal>' +
+        '<svg class="reality-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+          '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>' +
+          '<line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>' +
+        '</svg>' +
+        '<div class="reality-box__content">' +
+          '<h3>' + quote.titulo + '</h3>' +
+          '<p>' + quote.texto + '</p>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
   function renderMarcaLogo(el) {
     var iconSrc = HubConfig.marcaLogoIcon || '/assets/img/logo-icon.svg';
     var alt = HubConfig.marcaLogoAlt || HubConfig.marca || 'Farias Digital';
@@ -160,11 +237,35 @@
     proofBarRoot.innerHTML = HubConfig.proofBar.map(function (item, i) {
       return (
         '<div class="proof-bar__item" data-reveal data-reveal-delay="' + (i + 1) + '">' +
-          '<strong class="proof-bar__value" data-count="' + item.valor + '" data-count-suffix="' + (item.sufixo || '') + '">0' + (item.sufixo || '') + '</strong>' +
+          '<strong class="proof-bar__value" data-count="' + item.valor + '" data-count-suffix="' + (item.sufixo || '') + '">' + item.valor + (item.sufixo || '') + '</strong>' +
           '<span class="proof-bar__label">' + item.label + '</span>' +
         '</div>'
       );
     }).join('');
+  }
+
+  if (HubConfig.comparativoInstagram) {
+    var cmp = HubConfig.comparativoInstagram;
+    var resumoRoot = document.getElementById('comparativo-resumo-root');
+    if (resumoRoot) {
+      var limit = cmp.resumoLimite || 3;
+      resumoRoot.innerHTML = renderComparisonTable(
+        cmp.instagram.slice(0, limit),
+        cmp.site.slice(0, limit)
+      );
+    }
+    var fullRoot = document.getElementById('comparativo-full-root');
+    if (fullRoot) {
+      fullRoot.innerHTML = renderComparisonTable(cmp.instagram, cmp.site);
+    }
+    var statsRoot = document.getElementById('comparativo-stats-root');
+    if (statsRoot && cmp.stats) {
+      statsRoot.innerHTML = renderComparativoStats(cmp.stats);
+    }
+    var quoteRoot = document.getElementById('comparativo-quote-root');
+    if (quoteRoot && cmp.quote) {
+      quoteRoot.innerHTML = renderComparativoQuote(cmp.quote);
+    }
   }
 
   var intentRoot = document.getElementById('intent-root');
@@ -217,9 +318,9 @@
     injectWhatsAppIcons(pricingCalloutRoot);
   }
 
-  var servicosRoot = document.getElementById('servicos-root');
-  if (servicosRoot && HubConfig.servicos) {
-    servicosRoot.innerHTML = HubConfig.servicos.map(function (svc, i) {
+  var servicosRoots = document.querySelectorAll('[data-servicos-root]');
+  if (servicosRoots.length && HubConfig.servicos) {
+    var servicosHtml = HubConfig.servicos.map(function (svc, i) {
       var linkHtml;
       if (svc.externo && svc.href) {
         linkHtml = '<a href="' + svc.href + '" class="mini-service__link" target="_blank" rel="noopener noreferrer">Saiba mais →</a>';
@@ -227,7 +328,7 @@
         linkHtml = '<a href="' + buildWhatsAppUrl(svc.wa) + '" class="mini-service__link" target="_blank" rel="noopener noreferrer">Saiba mais →</a>';
       } else if (svc.href) {
         var hrefAttr = svc.externo ? ' href="' + svc.href + '" target="_blank" rel="noopener noreferrer"' : ' href="' + svc.href + '"';
-        linkHtml = '<a' + hrefAttr + ' class="mini-service__link">' + (svc.externo ? 'Saiba mais →' : 'Saiba mais →') + '</a>';
+        linkHtml = '<a' + hrefAttr + ' class="mini-service__link">Saiba mais →</a>';
       } else if (svc.anchor) {
         linkHtml = '<a href="' + svc.anchor + '" class="mini-service__link">Saiba mais →</a>';
       } else {
@@ -243,6 +344,9 @@
         '</article>'
       );
     }).join('');
+    servicosRoots.forEach(function (servicosRoot) {
+      servicosRoot.innerHTML = servicosHtml;
+    });
   }
 
   var credibilidadeRoot = document.getElementById('credibilidade-root');

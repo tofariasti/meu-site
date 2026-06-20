@@ -418,11 +418,45 @@ Obrigado!`,
     { valor: 100, sufixo: '%', label: 'Atendimento direto com o desenvolvedor' },
   ],
 
+  comparativoInstagram: {
+    eyebrow: 'Instagram não é estratégia',
+    titulo: 'Por que sua empresa não pode depender só do Instagram',
+    lead: 'O Instagram é importante. Mas se for sua única presença digital, você está perdendo clientes, dinheiro e controle sobre o seu negócio.',
+    instagram: [
+      { titulo: 'Não aparece no Google', texto: '97% das pessoas pesquisam no Google antes de comprar. Se você não tem site, não existe.' },
+      { titulo: 'Você não é dono da audiência', texto: 'Instagram pode banir, mudar regras ou sumir. Seu trabalho de anos pode desaparecer em um clique.' },
+      { titulo: 'Alcance orgânico despencou', texto: 'Menos de 10% dos seus seguidores veem seus posts. Instagram quer que você pague anúncios.' },
+      { titulo: 'Link na bio não converte', texto: 'Cliente tem que clicar no perfil, depois na bio, depois escolher. Você perde venda no caminho.' },
+      { titulo: 'Amadores têm o mesmo visual que você', texto: 'No Instagram, qualquer perfil parece igual. Não transmite autoridade nem diferencia sua marca.' },
+      { titulo: 'Sem controle sobre vendas', texto: 'Não há carrinho, pagamento automatizado, relatório de vendas ou automação de pós-venda.' },
+    ],
+    site: [
+      { titulo: 'Aparece no Google 24h por dia', texto: 'Clientes encontram você quando precisam. SEO traz visitas grátis, sem depender de algoritmo.' },
+      { titulo: 'Você é dono do canal', texto: 'Seu domínio, seu conteúdo, sua lista de clientes. Ninguém pode tirar isso de você.' },
+      { titulo: '100% do público vê seu conteúdo', texto: 'Não existe algoritmo cortando seu alcance. Quem acessa, vê tudo que você quer mostrar.' },
+      { titulo: 'Leva direto para a conversão', texto: 'Botões de WhatsApp, formulários estratégicos e páginas que vendem. Menos cliques, mais venda.' },
+      { titulo: 'Transmite profissionalismo e confiança', texto: 'Clientes levam mais a sério empresas com site. Design exclusivo posiciona você como referência.' },
+      { titulo: 'Vende enquanto você dorme', texto: 'Catálogo online, checkout automático, cupons, relatórios, integração com ERP e pagamento.' },
+    ],
+    quote: {
+      titulo: 'A verdade que ninguém te conta:',
+      texto: '<strong>Instagram serve para engajamento.</strong> Site serve para <strong>vender</strong>. São complementares, não concorrentes. Empresas sérias têm os dois — mas o site é a base. É ali que o cliente decide contratar ou não.',
+    },
+    stats: [
+      { valor: 81, sufixo: '%', texto: 'das pessoas pesquisam online antes de visitar uma empresa física', fonte: 'Google / Ipsos' },
+      { valor: 75, sufixo: '%', texto: 'julgam a credibilidade de uma empresa pelo design do site', fonte: 'Stanford Web Credibility Research' },
+      { valor: 70, sufixo: '%', texto: 'dos brasileiros usam o Google para encontrar produtos e serviços locais', fonte: 'Think with Google Brasil' },
+      { valor: 93, sufixo: '%', texto: 'das experiências online começam com um mecanismo de busca', fonte: 'BrightEdge' },
+    ],
+    resumoLimite: 3,
+    linkCompleto: '/por-que-site/',
+  },
+
   intentItems: [
     {
       titulo: 'Presença no Google',
       descricao: 'Aparecer quando o cliente pesquisa seu serviço na região.',
-      href: '/por-que-site/',
+      href: '/#site-vs-instagram',
     },
     {
       titulo: 'Vender pelo WhatsApp',
