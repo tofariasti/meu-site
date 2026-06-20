@@ -303,7 +303,7 @@ Obrigado!`,
       descricao: 'Cortes premium, barba, galeria de trabalhos e agendamento estruturado via WhatsApp.',
     },
     {
-      titulo: 'Igreja',
+      titulo: 'Igreja Nova Vida',
       segmento: 'Institucional',
       url: 'https://tofariasti.github.io/landing-igreja/',
       descricao: 'Programação de cultos, ministérios, depoimentos e agendamento de visita via WhatsApp.',
