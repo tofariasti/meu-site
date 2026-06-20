@@ -17,6 +17,8 @@ const HubConfig = {
   dominio: HUB_DOMINIO,
   dominioHost: HUB_DOMINIO_HOST,
   cidadeRegiao: 'Porto Alegre e região metropolitana',
+  empresaCnpj: '37.481.999/0001-48',
+  empresaEndereco: 'Av. Baltazar de Oliveira Garcia, 2478',
   email: 'fariasdigitalnaweb@gmail.com',
   whatsappNumero: '5551991213724',
   whatsappExibicao: '(51) 99121-3724',

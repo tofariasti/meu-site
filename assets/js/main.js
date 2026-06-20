@@ -184,6 +184,13 @@
     el.textContent = HubConfig.cidadeRegiao;
   });
 
+  document.querySelectorAll('[data-empresa-legal]').forEach(function (el) {
+    var parts = [];
+    if (HubConfig.empresaCnpj) parts.push('CNPJ ' + HubConfig.empresaCnpj);
+    if (HubConfig.empresaEndereco) parts.push(HubConfig.empresaEndereco);
+    el.textContent = parts.join(' · ');
+  });
+
   document.querySelectorAll('[data-logo]').forEach(renderMarcaLogo);
 
   document.querySelectorAll('[data-dominio]').forEach(function (el) {

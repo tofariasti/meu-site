@@ -1767,6 +1767,18 @@ a:hover { color: var(--color-accent); }
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.footer__bottom [data-empresa-legal] {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .footer__bottom [data-empresa-legal] {
+    text-align: left;
+  }
 }
 
 /* —— WhatsApp float —— */
