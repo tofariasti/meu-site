@@ -249,6 +249,12 @@ Obrigado!`,
       descricao: 'Serviços, depoimentos, antes/depois e agendamento pelo WhatsApp.',
     },
     {
+      titulo: 'Farmácia Vida & Saúde',
+      segmento: 'Saúde',
+      url: 'https://tofariasti.github.io/landing-farmacia/',
+      descricao: 'Landing page para farmácia com delivery, manipulação e agendamento via WhatsApp.',
+    },
+    {
       titulo: 'Psicóloga',
       segmento: 'Saúde',
       url: 'https://tofariasti.github.io/landing-page-psicologa/',
