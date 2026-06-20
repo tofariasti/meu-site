@@ -365,9 +365,9 @@ a:hover { color: var(--color-accent); }
 
 .logo__img {
   display: block;
-  height: clamp(2rem, 5vw, 2.65rem);
+  height: clamp(2.35rem, 5.5vw, 2.85rem);
   width: auto;
-  max-width: min(12rem, 42vw);
+  max-width: min(14rem, 48vw);
   object-fit: contain;
 }
 
