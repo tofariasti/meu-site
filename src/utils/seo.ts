@@ -1,31 +1,57 @@
-import { hubConfig } from '../data/hubConfig'
+import { getHubConfig } from '../data/hubConfig'
 import type { SeoPageKey } from '../data/types'
+import type { Locale } from '../i18n/types'
+import { hreflang, localizedPath } from '../i18n/types'
+import { uiCopy } from '../data/uiCopy'
 
-export function getPageMeta(page: SeoPageKey) {
-  const pagina = hubConfig.seo.paginas[page]
+function pageLabel(page: SeoPageKey, locale: Locale): string {
+  return uiCopy.breadcrumb[page][locale]
+}
+
+export function getPageMeta(page: SeoPageKey, locale: Locale) {
+  const config = getHubConfig(locale)
+  const pagina = config.seo.paginas[page]
   const path = page === 'home' ? '/' : `/${page}/`
-  const url = `${hubConfig.dominio}${path === '//' ? '/' : path}`
+  const localized = localizedPath(path, locale)
+  const url = `${config.dominio}${localized === '/' ? '' : localized}`.replace(/([^:]\/)\/+/g, '$1')
 
   return {
     title: pagina.title,
     description: pagina.description,
-    canonical: url,
-    ogImage: hubConfig.seo.ogImage,
+    canonical: url.endsWith('/') ? url : `${url}/`,
+    ogImage: config.seo.ogImage,
+    locale,
   }
 }
 
-function businessEntity() {
-  const seo = hubConfig.seo
+export function getHreflangAlternates(page: SeoPageKey) {
+  const path = page === 'home' ? '/' : `/${page}/`
+  const locales: Locale[] = ['pt', 'en', 'es']
+  const domain = getHubConfig('pt').dominio
+
+  return locales.map((locale) => {
+    const localized = localizedPath(path, locale)
+    const url = `${domain}${localized === '/' ? '/' : localized}`
+    return {
+      hreflang: hreflang(locale),
+      href: url.endsWith('/') ? url : `${url}/`,
+    }
+  })
+}
+
+function businessEntity(locale: Locale) {
+  const config = getHubConfig(locale)
+  const seo = config.seo
   return {
     '@type': 'LocalBusiness',
-    '@id': `${hubConfig.dominio}/#business`,
-    name: hubConfig.marca,
-    alternateName: hubConfig.nome,
-    url: hubConfig.dominio,
+    '@id': `${config.dominio}/#business`,
+    name: config.marca,
+    alternateName: config.nome,
+    url: config.dominio,
     image: seo.ogImage,
-    logo: `${hubConfig.dominio}/assets/img/logo-full.svg`,
+    logo: `${config.dominio}/assets/img/logo-full.svg`,
     description: seo.descriptionDefault,
-    email: hubConfig.email,
+    email: config.email,
     telephone: '+55-51-99121-3724',
     priceRange: 'R$300-R$5000',
     address: {
@@ -45,8 +71,8 @@ function businessEntity() {
     })),
     founder: {
       '@type': 'Person',
-      name: hubConfig.nomeCompleto,
-      url: `${hubConfig.dominio}/sobre/`,
+      name: config.nomeCompleto,
+      url: `${config.dominio}${localizedPath('/sobre/', locale)}`,
     },
     sameAs: seo.sameAs,
     knowsAbout: [
@@ -75,44 +101,40 @@ function breadcrumb(items: { name: string; url: string }[]) {
   }
 }
 
-export function buildJsonLd(page: SeoPageKey): object[] {
+export function buildJsonLd(page: SeoPageKey, locale: Locale): object[] {
   const schemas: object[] = []
-  const dominio = hubConfig.dominio
+  const config = getHubConfig(locale)
+  const dominio = config.dominio
+  const inLanguage = locale === 'pt' ? 'pt-BR' : locale === 'es' ? 'es' : 'en'
 
   if (page === 'home') {
     schemas.push({
       '@context': 'https://schema.org',
       '@graph': [
-        businessEntity(),
+        businessEntity(locale),
         {
           '@type': 'WebSite',
           '@id': `${dominio}/#website`,
           url: dominio,
-          name: hubConfig.marca,
-          description: hubConfig.seo.descriptionDefault,
+          name: config.marca,
+          description: config.seo.descriptionDefault,
           publisher: { '@id': `${dominio}/#business` },
-          inLanguage: 'pt-BR',
+          inLanguage,
         },
       ],
     })
     return schemas
   }
 
-  const pageNames: Record<SeoPageKey, string> = {
-    home: 'Início',
-    sites: 'Pacotes e preços',
-    portfolio: 'Portfólio',
-    faq: 'Perguntas frequentes',
-    'por-que-site': 'Por que ter site',
-    drone: 'Drone',
-    sobre: 'Sobre',
-  }
+  const pageNames = pageLabel
 
-  const path = `/${page}/`
+  const path = localizedPath(`/${page}/`, locale)
+  const pageUrl = `${dominio}${path === '/' ? '/' : path}`
+
   schemas.push(
     breadcrumb([
-      { name: 'Início', url: `${dominio}/` },
-      { name: pageNames[page], url: `${dominio}${path}` },
+      { name: pageNames('home', locale), url: `${dominio}${localizedPath('/', locale)}` },
+      { name: pageNames(page, locale), url: pageUrl },
     ]),
   )
 
@@ -120,7 +142,8 @@ export function buildJsonLd(page: SeoPageKey): object[] {
     schemas.push({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: hubConfig.seo.faq.map((item) => ({
+      inLanguage,
+      mainEntity: config.seo.faq.map((item) => ({
         '@type': 'Question',
         name: item.pergunta,
         acceptedAnswer: {
