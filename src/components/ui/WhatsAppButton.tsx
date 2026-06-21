@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { WhatsAppKey } from '../../data/types'
 import { buildWhatsAppUrl } from '../../utils/whatsapp'
+import { useLocale } from '../../i18n/LocaleContext'
 
 const WA_ICON = (
   <svg className="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -21,9 +22,10 @@ export function WhatsAppButton({
   className = 'btn btn--whatsapp',
   children,
 }: WhatsAppButtonProps) {
+  const { locale } = useLocale()
   return (
     <a
-      href={href ?? buildWhatsAppUrl(waKey)}
+      href={href ?? buildWhatsAppUrl(waKey, locale)}
       className={className}
       target="_blank"
       rel="noopener noreferrer"
@@ -35,9 +37,10 @@ export function WhatsAppButton({
 }
 
 export function WhatsAppFloat() {
+  const { locale } = useLocale()
   return (
     <a
-      href={buildWhatsAppUrl('geral')}
+      href={buildWhatsAppUrl('geral', locale)}
       className="wa-float"
       aria-label="WhatsApp"
       target="_blank"
