@@ -312,6 +312,12 @@ Obrigado!`,
       descricao: 'Design moderno com gradientes suaves, terapias, especialidades, depoimentos e formulário WhatsApp integrado.',
     },
     {
+      titulo: 'Nutricionista',
+      segmento: 'Saúde',
+      url: 'https://tofariasti.github.io/landing-nutricionista/',
+      descricao: 'Landing de conversão com calculadora IMC, painel demo para pacientes e planos alimentares — sem backend.',
+    },
+    {
       titulo: 'Imobiliária',
       segmento: 'Imóveis',
       url: 'https://tofariasti.github.io/landing-imobiliaria/',
