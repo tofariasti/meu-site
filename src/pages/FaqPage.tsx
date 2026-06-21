@@ -3,18 +3,22 @@ import { PageMeta } from '../components/ui/PageMeta'
 import { HeroHome } from '../components/sections/HeroHome'
 import { FaqList } from '../components/sections/FaqList'
 import { CtaBand } from '../components/sections/CtaBand'
+import { useLocale } from '../i18n/LocaleContext'
+import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
 
 export function FaqPage() {
+  const { t, pathFor } = useLocale()
+
   return (
     <>
       <PageMeta page="faq" />
       <HeroHome
         compact
-        label="Perguntas frequentes"
-        titleLines={['Dúvidas sobre', 'sites e landing pages']}
-        subtitle="Preços, prazos, SEO, domínio e Nota Fiscal — respostas objetivas para quem está pesquisando solução digital."
+        label={t(uiCopy.faq.label)}
+        titleLines={[t(uiCopy.faq.title1), t(uiCopy.faq.title2)]}
+        subtitle={t(uiCopy.faq.subtitle)}
         showPreview={false}
       />
 
@@ -22,20 +26,20 @@ export function FaqPage() {
         <div className="container">
           <FaqList />
           <AnimatedSection style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-            <Link to="/sites/" className="btn btn--outline btn--lg">
-              Ver pacotes e preços
+            <Link to={pathFor('/sites/')} className="btn btn--outline btn--lg">
+              {t(uiCopy.cta.viewPackages)}
             </Link>
             <WhatsAppButton waKey="geral" className="btn btn--whatsapp btn--lg">
-              Falar no WhatsApp
+              {t(uiCopy.cta.whatsapp)}
             </WhatsAppButton>
           </AnimatedSection>
         </div>
       </section>
 
       <CtaBand
-        title="Não encontrou sua resposta?"
-        text="Mande sua dúvida — retorno em até 24h, sem compromisso."
-        buttonLabel="Chamar no WhatsApp"
+        title={t(uiCopy.faq.notFoundTitle)}
+        text={t(uiCopy.faq.notFoundText)}
+        buttonLabel={t(uiCopy.cta.chatWhatsApp)}
       />
     </>
   )

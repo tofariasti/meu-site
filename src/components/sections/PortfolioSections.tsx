@@ -1,12 +1,16 @@
 import { useMemo, useState } from 'react'
-import { hubConfig } from '../../data/hubConfig'
+import { useHubConfig } from '../../i18n/useHubConfig'
+import { useLocale } from '../../i18n/LocaleContext'
+import { uiCopy } from '../../data/uiCopy'
 import { buildDemoWhatsAppUrl } from '../../utils/whatsapp'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
 import type { Demo } from '../../data/types'
 
 function DemoCard({ demo, index }: { demo: Demo; index: number }) {
-  const badge = demo.badge ?? hubConfig.portfolio.badgeDemo
+  const config = useHubConfig()
+  const { t } = useLocale()
+  const badge = demo.badge ?? config.portfolio.badgeDemo
   const hasIframe = demo.preview !== false && demo.url && !demo.url.includes('github.com')
 
   return (
@@ -43,7 +47,7 @@ function DemoCard({ demo, index }: { demo: Demo; index: number }) {
         <p className="demo-card__desc">{demo.descricao}</p>
         <div className="demo-card__actions">
           <a href={demo.url} className="btn btn--outline" target="_blank" rel="noopener noreferrer">
-            Ver site
+            {t(uiCopy.cta.viewSite)}
           </a>
           <a
             href={buildDemoWhatsAppUrl(demo.titulo)}
@@ -51,7 +55,7 @@ function DemoCard({ demo, index }: { demo: Demo; index: number }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Quero um assim
+            {t(uiCopy.cta.wantLikeThis)}
           </a>
         </div>
       </div>
@@ -60,18 +64,21 @@ function DemoCard({ demo, index }: { demo: Demo; index: number }) {
 }
 
 export function DemoGrid() {
+  const config = useHubConfig()
+  const { t } = useLocale()
+
   const segmentos = useMemo(() => {
     const set = new Set<string>(['todos'])
-    hubConfig.demos.forEach((d) => set.add(d.segmento))
+    config.demos.forEach((d) => set.add(d.segmento))
     return [...set]
-  }, [])
+  }, [config.demos])
 
   const [filter, setFilter] = useState('todos')
 
   const filtered =
     filter === 'todos'
-      ? hubConfig.demos
-      : hubConfig.demos.filter((d) => d.segmento === filter)
+      ? config.demos
+      : config.demos.filter((d) => d.segmento === filter)
 
   return (
     <>
@@ -83,7 +90,7 @@ export function DemoGrid() {
             className={`filter-btn${filter === seg ? ' is-active' : ''}`}
             onClick={() => setFilter(seg)}
           >
-            {seg === 'todos' ? 'Todos' : seg}
+            {seg === 'todos' ? t(uiCopy.common.filterAll) : seg}
           </button>
         ))}
       </div>
@@ -97,21 +104,24 @@ export function DemoGrid() {
 }
 
 export function PricingCallout() {
-  const pl = hubConfig.pricingLanding
+  const config = useHubConfig()
+  const { t } = useLocale()
+  const pl = config.pricingLanding
+
   return (
     <div className="pricing-callout">
       <div className="pricing-callout__content">
-        <p className="pricing-callout__eyebrow">Investimento acessível</p>
+        <p className="pricing-callout__eyebrow">{t(uiCopy.common.affordableInvestment)}</p>
         <h3 className="pricing-callout__title">{pl.titulo}</h3>
         <p className="pricing-callout__price">{pl.preco}</p>
         <p className="pricing-callout__lead">{pl.lead}</p>
       </div>
       <div className="pricing-callout__actions">
         <WhatsAppButton waKey="pacoteLanding" className="btn btn--whatsapp btn--lg">
-          Quero minha landing
+          {t(uiCopy.cta.wantLanding)}
         </WhatsAppButton>
         <a href="#demos-root" className="btn btn--outline">
-          Ver modelos
+          {t(uiCopy.cta.viewModels)}
         </a>
       </div>
     </div>
@@ -119,16 +129,19 @@ export function PricingCallout() {
 }
 
 export function CasesGrid() {
+  const config = useHubConfig()
+  const { t } = useLocale()
+
   return (
     <div className="cases-grid">
-      {hubConfig.cases.map((c, i) => (
+      {config.cases.map((c, i) => (
         <AnimatedSection key={c.titulo} delay={i + 1} className="case-card">
           <p className="case-card__segment">{c.segmento}</p>
           <h3 className="case-card__title">{c.titulo}</h3>
           <p className="case-card__desc">{c.descricao}</p>
           {c.url && (
             <a href={c.url} className="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
-              Ver projeto
+              {t(uiCopy.cta.viewProject)}
             </a>
           )}
         </AnimatedSection>
@@ -138,7 +151,10 @@ export function CasesGrid() {
 }
 
 export function CredibilitySection() {
-  const cred = hubConfig.credibilidade
+  const config = useHubConfig()
+  const { t } = useLocale()
+  const cred = config.credibilidade
+
   return (
     <div className="credibility-grid">
       <AnimatedSection direction="left">
@@ -154,12 +170,12 @@ export function CredibilitySection() {
         </div>
         <p style={{ marginTop: '1.5rem' }}>
           <a
-            href={hubConfig.links.portfolio}
+            href={config.links.portfolio}
             className="btn btn--outline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Ver portfólio técnico completo
+            {t(uiCopy.cta.viewTechnicalPortfolio)}
           </a>
         </p>
       </AnimatedSection>

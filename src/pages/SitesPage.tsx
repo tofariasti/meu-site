@@ -4,27 +4,31 @@ import { HeroHome } from '../components/sections/HeroHome'
 import { MiniServices } from '../components/sections/MiniServices'
 import { PackageGrid, ProcessSteps } from '../components/sections/PackageGrid'
 import { CtaBand, SectionHeader } from '../components/sections/CtaBand'
+import { useLocale } from '../i18n/LocaleContext'
+import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
 
 export function SitesPage() {
+  const { t, pathFor } = useLocale()
+
   return (
     <>
       <PageMeta page="sites" />
       <HeroHome
         compact
-        label="Pacotes e preços"
-        titleLines={['Serviços, investimentos', 'e processo de entrega']}
-        subtitle="Escopo fechado, SEO básico e WhatsApp integrado — do primeiro contato ao site no ar. MEI · Nota Fiscal · atendimento direto."
+        label={t(uiCopy.sites.label)}
+        titleLines={[t(uiCopy.sites.title1), t(uiCopy.sites.title2)]}
+        subtitle={t(uiCopy.sites.subtitle)}
         showPreview={false}
         showPricingTags
         actions={
           <div className="hero__actions">
             <a href="#pacotes" className="btn btn--primary btn--lg">
-              Ver pacotes
+              {t(uiCopy.cta.viewPackagesShort)}
             </a>
             <WhatsAppButton waKey="site" className="btn btn--whatsapp btn--lg">
-              Pedir orçamento
+              {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </div>
         }
@@ -33,22 +37,18 @@ export function SitesPage() {
       <section className="section section--alt section--glow">
         <div className="container">
           <SectionHeader
-            eyebrow="// para quem é"
-            title="Negócios locais que querem mais contato"
-            lead="Lojas, clínicas, oficinas, imobiliárias, restaurantes e prestadores de serviço — quem depende de WhatsApp e indicação para vender."
+            eyebrow={t(uiCopy.sites.audienceEyebrow)}
+            title={t(uiCopy.sites.audienceTitle)}
+            lead={t(uiCopy.sites.audienceLead)}
           />
           <div className="service-grid">
             <AnimatedSection delay={1} className="service-card">
-              <h3 className="service-card__title">O problema</h3>
-              <p className="service-card__text">
-                Instagram sozinho não basta. Cliente pesquisa no Google, compara e desconfia de quem não tem site ou parece amador.
-              </p>
+              <h3 className="service-card__title">{t(uiCopy.sites.problemTitle)}</h3>
+              <p className="service-card__text">{t(uiCopy.sites.problemText)}</p>
             </AnimatedSection>
             <AnimatedSection delay={2} className="service-card">
-              <h3 className="service-card__title">A solução</h3>
-              <p className="service-card__text">
-                Site, loja online ou landing com WhatsApp integrado: formulários que montam a mensagem, catálogo de produtos e automação básica de atendimento — tudo pensado para o celular do seu cliente.
-              </p>
+              <h3 className="service-card__title">{t(uiCopy.sites.solutionTitle)}</h3>
+              <p className="service-card__text">{t(uiCopy.sites.solutionText)}</p>
             </AnimatedSection>
           </div>
         </div>
@@ -58,13 +58,14 @@ export function SitesPage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Serviços"
+            eyebrow={t(uiCopy.common.services)}
             title={
               <>
-                Soluções completas <span className="highlight">para o seu negócio</span>
+                {t(uiCopy.sites.servicesTitleBefore)}
+                <span className="highlight">{t(uiCopy.sites.servicesTitleHighlight)}</span>
               </>
             }
-            lead="Do modelo pronto à loja online e integrações — escopo e investimento definidos no orçamento."
+            lead={t(uiCopy.sites.servicesLead)}
           />
           <MiniServices />
         </div>
@@ -74,13 +75,14 @@ export function SitesPage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Pacotes"
+            eyebrow={t(uiCopy.common.packages)}
             title={
               <>
-                Escolha o pacote <span className="highlight">ideal</span>
+                {t(uiCopy.sites.packagesTitleBefore)}
+                <span className="highlight">{t(uiCopy.sites.packagesTitleHighlight)}</span>
               </>
             }
-            lead="Investimento transparente desde o primeiro contato — retorno em até 24h."
+            lead={t(uiCopy.sites.packagesLead)}
           />
           <PackageGrid />
         </div>
@@ -88,7 +90,7 @@ export function SitesPage() {
 
       <section className="section section--alt">
         <div className="container">
-          <SectionHeader eyebrow="// como funciona" title="Do primeiro contato ao site no ar" />
+          <SectionHeader eyebrow={t(uiCopy.sites.processEyebrow)} title={t(uiCopy.sites.processTitle)} />
           <ProcessSteps />
         </div>
       </section>
@@ -97,26 +99,26 @@ export function SitesPage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Referências visuais"
-            title="Quer ver o layout antes de contratar?"
-            lead="Mais de 40 modelos por segmento no portfólio — pet shop, clínicas, lojas, turismo e muito mais. Landing pages personalizáveis a partir de R$ 300."
+            eyebrow={t(uiCopy.sites.referencesEyebrow)}
+            title={t(uiCopy.sites.referencesTitle)}
+            lead={t(uiCopy.sites.referencesLead)}
           />
           <AnimatedSection className="section__actions" style={{ textAlign: 'center' }}>
-            <Link to="/portfolio/" className="btn btn--primary btn--lg">
-              Abrir portfólio completo
+            <Link to={pathFor('/portfolio/')} className="btn btn--primary btn--lg">
+              {t(uiCopy.cta.openFullPortfolio)}
             </Link>
             <WhatsAppButton waKey="pacoteLanding" className="btn btn--whatsapp btn--lg">
-              Quero minha landing
+              {t(uiCopy.cta.wantLanding)}
             </WhatsAppButton>
           </AnimatedSection>
         </div>
       </section>
 
       <CtaBand
-        title="Quer um site como estes para sua empresa?"
-        text="Mande uma mensagem com o tipo do seu negócio — retorno em até 24h com pacote, prazo e investimento."
+        title={t(uiCopy.sites.ctaTitle)}
+        text={t(uiCopy.sites.ctaText)}
         waKey="site"
-        buttonLabel="Solicitar orçamento no WhatsApp"
+        buttonLabel={t(uiCopy.cta.requestQuoteWhatsApp)}
       />
     </>
   )

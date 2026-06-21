@@ -10,12 +10,16 @@ import {
 import { MiniServices } from '../components/sections/MiniServices'
 import { IntentGrid } from '../components/sections/IntentGrid'
 import { Marquee, DiffGrid, CtaBand, SectionHeader } from '../components/sections/CtaBand'
-import { hubConfig } from '../data/hubConfig'
+import { useHubConfig } from '../i18n/useHubConfig'
+import { useLocale } from '../i18n/LocaleContext'
+import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
 
 export function HomePage() {
-  const cmp = hubConfig.comparativoInstagram
+  const config = useHubConfig()
+  const { t, pathFor } = useLocale()
+  const cmp = config.comparativoInstagram
   const limit = cmp.resumoLimite
 
   return (
@@ -34,7 +38,8 @@ export function HomePage() {
             eyebrow={cmp.eyebrow}
             title={
               <>
-                Por que sua empresa <span className="highlight">não pode depender só do Instagram</span>
+                {t(uiCopy.home.comparativoTitleBefore)}
+                <span className="highlight">{t(uiCopy.home.comparativoHighlight)}</span>
               </>
             }
             lead={cmp.lead}
@@ -49,17 +54,17 @@ export function HomePage() {
             <ComparativoQuote titulo={cmp.quote.titulo} texto={cmp.quote.texto} />
           </AnimatedSection>
           <AnimatedSection className="comparativo-more">
-            <Link to="/por-que-site/" className="btn btn--outline">
-              Ver comparativo completo com dados →
+            <Link to={pathFor('/por-que-site/')} className="btn btn--outline">
+              {t(uiCopy.cta.viewFullComparison)}
             </Link>
           </AnimatedSection>
           <AnimatedSection className="inline-cta inline-cta--emphasis">
             <p>
-              Pare de perder clientes para quem tem site.{' '}
-              <strong>Invista na ferramenta que realmente vende.</strong>
+              {t(uiCopy.home.stopLosingClients)}{' '}
+              <strong>{t(uiCopy.home.investInTool)}</strong>
             </p>
-            <Link to="/sites/" className="btn btn--primary btn--lg">
-              Ver pacotes e preços
+            <Link to={pathFor('/sites/')} className="btn btn--primary btn--lg">
+              {t(uiCopy.cta.viewPackages)}
             </Link>
           </AnimatedSection>
         </div>
@@ -69,21 +74,22 @@ export function HomePage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Serviços"
+            eyebrow={t(uiCopy.home.servicesEyebrow)}
             title={
               <>
-                Muito além de <span className="highlight">criar sites</span>
+                {t(uiCopy.home.servicesTitleBefore)}
+                <span className="highlight">{t(uiCopy.home.servicesTitleHighlight)}</span>
               </>
             }
-            lead="Landing pages, e-commerce, automação de WhatsApp, integrações com APIs e imagens aéreas com drone — soluções digitais completas para PMEs, com escopo claro no orçamento."
+            lead={t(uiCopy.home.servicesLead)}
           />
           <MiniServices />
           <AnimatedSection className="servicos-home-cta">
-            <Link to="/sites/" className="btn btn--outline btn--lg">
-              Ver pacotes e preços
+            <Link to={pathFor('/sites/')} className="btn btn--outline btn--lg">
+              {t(uiCopy.cta.viewPackages)}
             </Link>
             <WhatsAppButton waKey="geral" className="btn btn--whatsapp btn--lg">
-              Pedir orçamento
+              {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </AnimatedSection>
         </div>
@@ -95,13 +101,14 @@ export function HomePage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="O que você busca hoje?"
+            eyebrow={t(uiCopy.home.goalsEyebrow)}
             title={
               <>
-                Escolha o caminho <span className="highlight">certo para seu negócio</span>
+                {t(uiCopy.home.goalsTitleBefore)}
+                <span className="highlight">{t(uiCopy.home.goalsTitleHighlight)}</span>
               </>
             }
-            lead="Cada solução tem escopo e investimento definidos — sem surpresas no orçamento."
+            lead={t(uiCopy.home.goalsLead)}
           />
           <IntentGrid />
         </div>
@@ -111,40 +118,35 @@ export function HomePage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Explore"
+            eyebrow={t(uiCopy.home.exploreEyebrow)}
             title={
               <>
-                Próximos passos <span className="highlight">para contratar</span>
+                {t(uiCopy.home.exploreTitleBefore)}
+                <span className="highlight">{t(uiCopy.home.exploreTitleHighlight)}</span>
               </>
             }
-            lead="Pacotes, exemplos reais e respostas diretas — tudo a um clique."
+            lead={t(uiCopy.home.exploreLead)}
           />
           <div className="intent-grid">
             <AnimatedSection delay={1}>
-              <Link to="/sites/" className="intent-card">
-                <h3 className="intent-card__title">Pacotes e preços</h3>
-                <p className="intent-card__desc">
-                  Serviços, investimentos e processo de entrega — do orçamento à publicação.
-                </p>
-                <span className="intent-card__link">Ver pacotes →</span>
+              <Link to={pathFor('/sites/')} className="intent-card">
+                <h3 className="intent-card__title">{t(uiCopy.home.cardPackagesTitle)}</h3>
+                <p className="intent-card__desc">{t(uiCopy.home.cardPackagesDesc)}</p>
+                <span className="intent-card__link">{t(uiCopy.home.cardPackagesLink)}</span>
               </Link>
             </AnimatedSection>
             <AnimatedSection delay={2}>
-              <Link to="/portfolio/" className="intent-card">
-                <h3 className="intent-card__title">Portfólio e exemplos</h3>
-                <p className="intent-card__desc">
-                  40+ modelos por segmento e projetos em produção para avaliar antes de contratar.
-                </p>
-                <span className="intent-card__link">Ver modelos →</span>
+              <Link to={pathFor('/portfolio/')} className="intent-card">
+                <h3 className="intent-card__title">{t(uiCopy.home.cardPortfolioTitle)}</h3>
+                <p className="intent-card__desc">{t(uiCopy.home.cardPortfolioDesc)}</p>
+                <span className="intent-card__link">{t(uiCopy.home.cardPortfolioLink)}</span>
               </Link>
             </AnimatedSection>
             <AnimatedSection delay={3}>
-              <Link to="/faq/" className="intent-card">
-                <h3 className="intent-card__title">Perguntas frequentes</h3>
-                <p className="intent-card__desc">
-                  Preços, prazos, SEO, domínio, hospedagem e Nota Fiscal — respostas diretas.
-                </p>
-                <span className="intent-card__link">Ver FAQ →</span>
+              <Link to={pathFor('/faq/')} className="intent-card">
+                <h3 className="intent-card__title">{t(uiCopy.home.cardFaqTitle)}</h3>
+                <p className="intent-card__desc">{t(uiCopy.home.cardFaqDesc)}</p>
+                <span className="intent-card__link">{t(uiCopy.home.cardFaqLink)}</span>
               </Link>
             </AnimatedSection>
           </div>
@@ -155,32 +157,34 @@ export function HomePage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Como trabalho"
+            eyebrow={t(uiCopy.home.howEyebrow)}
             title={
               <>
-                Entrega direta, <span className="highlight">sem intermediários</span>
+                {t(uiCopy.home.howTitleBefore)}
+                <span className="highlight">{t(uiCopy.home.howTitleHighlight)}</span>
               </>
             }
-            lead="Você fala com quem desenvolve — escopo fechado, prazo claro e suporte humano após a publicação."
+            lead={t(uiCopy.home.howLead)}
           />
           <DiffGrid />
           <AnimatedSection className="inline-cta">
             <p>
-              Ainda tem dúvida? <Link to="/faq/">Veja o FAQ</Link> ou{' '}
-              <Link to="/por-que-site/">leia o comparativo completo</Link>.
+              {t(uiCopy.home.stillDoubt)}{' '}
+              <Link to={pathFor('/faq/')}>{t(uiCopy.home.seeFaq)}</Link> {t(uiCopy.home.stillDoubtOr)}{' '}
+              <Link to={pathFor('/por-que-site/')}>{t(uiCopy.home.readComparison)}</Link>.
             </p>
-            <WhatsAppButton waKey="geral">Falar agora pelo WhatsApp</WhatsAppButton>
+            <WhatsAppButton waKey="geral">{t(uiCopy.cta.talkNowWhatsApp)}</WhatsAppButton>
           </AnimatedSection>
         </div>
       </section>
 
       <CtaBand
-        title="Vamos tirar seu projeto do papel?"
+        title={t(uiCopy.home.ctaTitle)}
         text={
           <>
-            Retorno em até 24h · Proposta sem compromisso ·{' '}
-            <Link to="/sites/" style={{ color: 'inherit', textDecoration: 'underline' }}>
-              Ver pacotes e preços
+            {t(uiCopy.home.ctaTextBefore)}
+            <Link to={pathFor('/sites/')} style={{ color: 'inherit', textDecoration: 'underline' }}>
+              {t(uiCopy.cta.viewPackages)}
             </Link>
           </>
         }

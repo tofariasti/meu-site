@@ -1,60 +1,40 @@
 import { PageMeta } from '../components/ui/PageMeta'
 import { HeroHome } from '../components/sections/HeroHome'
 import { SectionHeader } from '../components/sections/CtaBand'
-import { hubConfig } from '../data/hubConfig'
+import { useHubConfig } from '../i18n/useHubConfig'
+import { useLocale } from '../i18n/LocaleContext'
+import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
 
-const DRONE_SERVICES = [
-  {
-    title: 'Imóveis e loteamentos',
-    text: 'Mostre terreno, fachada, vizinhança e potencial da área — o que foto no chão não transmite.',
-  },
-  {
-    title: 'Airbnb e turismo',
-    text: 'Anúncio com entorno, acesso e clima do bairro — menos dúvida do hóspede, mais reservas.',
-  },
-  {
-    title: 'Obras e empresas',
-    text: 'Registre evolução da obra ou crie conteúdo premium para feed e apresentações comerciais.',
-  },
-  {
-    title: 'Eventos',
-    text: 'Vistas aéreas memoráveis que ampliam a experiência do público e do organizador.',
-  },
-]
-
-const TRUST_ITEMS = [
-  'Equipamento DJI Mini 3 — imagens estáveis e nítidas',
-  'Voos planejados conforme ANAC, DECEA e condições de segurança',
-  'MEI com emissão de Nota Fiscal',
-  'Referências: Auxiliadora Predial, Clipes Imóveis, Ápice Incorporadora',
-]
-
 export function DronePage() {
-  const pkg = hubConfig.pacoteDrone
+  const config = useHubConfig()
+  const { t } = useLocale()
+  const pkg = config.pacoteDrone
+  const services = uiCopy.drone.services.map((s) => ({ title: t(s.title), text: t(s.text) }))
+  const trustItems = uiCopy.drone.trust.map((item) => t(item))
 
   return (
     <>
       <PageMeta page="drone" />
       <HeroHome
         compact
-        label="TechDrone360"
-        titleLines={['Fotos e vídeos aéreos que', 'vendem o lugar']}
-        subtitle="Imóveis, Airbnb, obras, hotéis e eventos — captação profissional com drone DJI que mostra escala, entorno e sensação do local."
+        label={t(uiCopy.drone.label)}
+        titleLines={[t(uiCopy.drone.title1), t(uiCopy.drone.title2)]}
+        subtitle={t(uiCopy.drone.subtitle)}
         showPreview={false}
         actions={
           <div className="hero__actions">
             <a
-              href={hubConfig.links.techdrone360}
+              href={config.links.techdrone360}
               className="btn btn--primary btn--lg"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Ver portfólio completo
+              {t(uiCopy.cta.viewFullPortfolio)}
             </a>
             <WhatsAppButton waKey="drone" className="btn btn--whatsapp btn--lg">
-              Pedir orçamento
+              {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </div>
         }
@@ -63,27 +43,27 @@ export function DronePage() {
       <section className="section section--alt">
         <div className="container">
           <AnimatedSection className="drone-hero-card">
-            <h2 className="drone-hero-card__title">Operação TechDrone360</h2>
+            <h2 className="drone-hero-card__title">{t(uiCopy.drone.operationTitle)}</h2>
             <p>
-              O site completo com vídeos, portfólio, FAQ e referências de clientes está em{' '}
-              <strong>techdrone360.com.br</strong> — marca dedicada à captação aérea profissional.
+              {t(uiCopy.drone.operationText)}{' '}
+              <strong>techdrone360.com.br</strong> {t(uiCopy.drone.operationSuffix)}
             </p>
             <div className="hero__actions" style={{ marginBottom: 0 }}>
               <a
-                href={hubConfig.links.techdrone360}
+                href={config.links.techdrone360}
                 className="btn btn--outline btn--lg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Abrir TechDrone360
+                {t(uiCopy.cta.openTechDrone)}
               </a>
               <a
-                href={hubConfig.links.youtubeDrone}
+                href={config.links.youtubeDrone}
                 className="btn btn--outline btn--lg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Canal no YouTube
+                {t(uiCopy.cta.youtubeChannel)}
               </a>
             </div>
           </AnimatedSection>
@@ -92,9 +72,9 @@ export function DronePage() {
 
       <section className="section">
         <div className="container">
-          <SectionHeader eyebrow="// serviços" title="Para quem é a captação aérea" />
+          <SectionHeader eyebrow={t(uiCopy.drone.servicesEyebrow)} title={t(uiCopy.drone.servicesTitle)} />
           <div className="service-grid">
-            {DRONE_SERVICES.map((item, i) => (
+            {services.map((item, i) => (
               <AnimatedSection key={item.title} delay={i + 1} className="service-card">
                 <h3 className="service-card__title">{item.title}</h3>
                 <p className="service-card__text">{item.text}</p>
@@ -108,9 +88,9 @@ export function DronePage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="// pacote de entrada"
-            title="Drone Imóvel"
-            lead="Referência para imobiliárias e corretores. Valor final conforme local e complexidade."
+            eyebrow={t(uiCopy.drone.packageEyebrow)}
+            title={t(uiCopy.drone.packageTitle)}
+            lead={t(uiCopy.drone.packageLead)}
           />
           <AnimatedSection
             delay={1}
@@ -125,11 +105,9 @@ export function DronePage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="package-card__note">
-              Deslocamento, autorizações especiais (SARPAS) e complexidade do local podem alterar o valor — informe o endereço no orçamento.
-            </p>
+            <p className="package-card__note">{t(uiCopy.drone.packageNote)}</p>
             <WhatsAppButton waKey="pacoteDrone" className="btn btn--whatsapp btn--block">
-              Pedir orçamento
+              {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </AnimatedSection>
         </div>
@@ -137,13 +115,13 @@ export function DronePage() {
 
       <section className="section">
         <div className="container">
-          <SectionHeader eyebrow="// confiança" title="Por que contratar" />
+          <SectionHeader eyebrow={t(uiCopy.drone.trustEyebrow)} title={t(uiCopy.drone.trustTitle)} />
           <AnimatedSection delay={1}>
             <ul
               className="trust-bar"
               style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.85rem' }}
             >
-              {TRUST_ITEMS.map((item) => (
+              {trustItems.map((item) => (
                 <li key={item}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 12l2 2 4-4" />
@@ -160,16 +138,14 @@ export function DronePage() {
       <section className="cta-band">
         <div className="container">
           <AnimatedSection>
-            <h2 className="cta-band__title">Veja o resultado antes de decidir</h2>
+            <h2 className="cta-band__title">{t(uiCopy.drone.ctaTitle)}</h2>
           </AnimatedSection>
           <AnimatedSection delay={1}>
-            <p className="cta-band__text">
-              Captação profissional 4K com operador certificado — retorno em até 24h, Nota Fiscal e material pronto para anunciar.
-            </p>
+            <p className="cta-band__text">{t(uiCopy.drone.ctaText)}</p>
           </AnimatedSection>
           <AnimatedSection delay={2} className="hero__actions" style={{ justifyContent: 'center', marginBottom: 0 }}>
             <a
-              href={hubConfig.links.techdrone360}
+              href={config.links.techdrone360}
               className="btn btn--outline btn--lg"
               style={{ borderColor: 'rgba(255,255,255,0.4)', color: '#fff' }}
               target="_blank"
@@ -178,7 +154,7 @@ export function DronePage() {
               techdrone360.com.br
             </a>
             <WhatsAppButton waKey="drone" className="btn btn--whatsapp btn--lg">
-              WhatsApp
+              {t(uiCopy.common.whatsapp)}
             </WhatsAppButton>
           </AnimatedSection>
         </div>

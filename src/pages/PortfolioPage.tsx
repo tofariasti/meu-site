@@ -6,12 +6,16 @@ import {
   CredibilitySection,
 } from '../components/sections/PortfolioSections'
 import { CtaBand, SectionHeader } from '../components/sections/CtaBand'
-import { hubConfig } from '../data/hubConfig'
+import { useHubConfig } from '../i18n/useHubConfig'
+import { useLocale } from '../i18n/LocaleContext'
+import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
 
 export function PortfolioPage() {
-  const p = hubConfig.portfolio
+  const config = useHubConfig()
+  const { t } = useLocale()
+  const p = config.portfolio
 
   return (
     <>
@@ -22,7 +26,7 @@ export function PortfolioPage() {
             center
             compact
             titleAs="h1"
-            eyebrow="Portfólio"
+            eyebrow={t(uiCopy.common.portfolioEyebrow)}
             title={
               <>
                 <span className="section__title-line">{p.titulo}</span>
@@ -35,10 +39,10 @@ export function PortfolioPage() {
           />
           <AnimatedSection className="section__actions">
             <a href="#demos-root" className="btn btn--primary btn--lg">
-              Ver modelos
+              {t(uiCopy.cta.viewModels)}
             </a>
             <WhatsAppButton waKey="pacoteLanding" className="btn btn--whatsapp btn--lg">
-              Pedir orçamento
+              {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </AnimatedSection>
 
@@ -55,7 +59,7 @@ export function PortfolioPage() {
             </div>
             <AnimatedSection style={{ textAlign: 'center', marginTop: '2rem' }}>
               <WhatsAppButton waKey="pacoteLanding" className="btn btn--whatsapp btn--lg">
-                Quero minha landing a partir de R$ 300
+                {t(uiCopy.cta.wantLandingFrom300)}
               </WhatsAppButton>
             </AnimatedSection>
           </div>
@@ -66,13 +70,14 @@ export function PortfolioPage() {
         <div className="container">
           <SectionHeader
             center
-            eyebrow="Projetos reais"
+            eyebrow={t(uiCopy.common.realProjects)}
             title={
               <>
-                Cases em <span className="highlight">produção</span>
+                {t(uiCopy.portfolio.casesTitleBefore)}
+                <span className="highlight">{t(uiCopy.portfolio.casesTitleHighlight)}</span>
               </>
             }
-            lead="Sites e aplicações que desenvolvi — referências de qualidade técnica e conversão. Projetos corporativos citados na trajetória referem-se à atuação em equipe."
+            lead={t(uiCopy.portfolio.casesLead)}
           />
           <CasesGrid />
         </div>
@@ -85,10 +90,10 @@ export function PortfolioPage() {
       </section>
 
       <CtaBand
-        title="Gostou de algum modelo?"
-        text="Conte seu segmento — adapto o layout com sua marca, textos e WhatsApp."
+        title={t(uiCopy.portfolio.likedModel)}
+        text={t(uiCopy.portfolio.likedModelText)}
         waKey="pacoteLanding"
-        buttonLabel="Solicitar orçamento"
+        buttonLabel={t(uiCopy.cta.requestQuoteShort)}
       />
     </>
   )

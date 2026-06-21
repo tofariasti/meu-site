@@ -1,4 +1,6 @@
 import type { ComparativoItem } from '../../data/types'
+import { useLocale } from '../../i18n/LocaleContext'
+import { uiCopy } from '../../data/uiCopy'
 
 const ICON_X = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -50,21 +52,23 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({ instagramItems, siteItems }: ComparisonTableProps) {
+  const { t } = useLocale()
+
   return (
     <div className="comparison-table">
       <div className="comparison-col comparison-col--danger">
         <div className="comparison-col__header">
           {ICON_INSTAGRAM}
-          <h3>Só Instagram</h3>
-          <span className="comparison-tag comparison-tag--danger">Risco alto</span>
+          <h3>{t(uiCopy.comparison.instagramOnly)}</h3>
+          <span className="comparison-tag comparison-tag--danger">{t(uiCopy.comparison.highRisk)}</span>
         </div>
         <ComparisonList items={instagramItems} type="bad" />
       </div>
       <div className="comparison-col comparison-col--success">
         <div className="comparison-col__header">
           {ICON_MONITOR}
-          <h3>Site Profissional</h3>
-          <span className="comparison-tag comparison-tag--success">Controle total</span>
+          <h3>{t(uiCopy.comparison.professionalSite)}</h3>
+          <span className="comparison-tag comparison-tag--success">{t(uiCopy.comparison.fullControl)}</span>
         </div>
         <ComparisonList items={siteItems} type="good" />
       </div>
@@ -100,9 +104,11 @@ export function ComparativoStats({
 }: {
   stats: { valor: number; sufixo: string; texto: string; fonte: string }[]
 }) {
+  const { t } = useLocale()
+
   return (
     <div className="stats-proof">
-      <h3 className="stats-proof__title">Dados que comprovam:</h3>
+      <h3 className="stats-proof__title">{t(uiCopy.comparison.statsTitle)}</h3>
       <div className="stats-proof__grid">
         {stats.map((s) => (
           <div key={s.texto} className="stats-proof__item">

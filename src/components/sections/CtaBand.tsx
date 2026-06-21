@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
+import { useLocale } from '../../i18n/LocaleContext'
+import { uiCopy } from '../../data/uiCopy'
 import type { WhatsAppKey } from '../../data/types'
 
 interface CtaBandProps {
@@ -14,8 +16,10 @@ export function CtaBand({
   title,
   text,
   waKey = 'geral',
-  buttonLabel = 'Falar no WhatsApp',
+  buttonLabel,
 }: CtaBandProps) {
+  const { t } = useLocale()
+
   return (
     <section className="cta-band">
       <div className="container">
@@ -27,7 +31,7 @@ export function CtaBand({
         </AnimatedSection>
         <AnimatedSection delay={2}>
           <WhatsAppButton waKey={waKey} className="btn btn--whatsapp btn--lg cta-band__btn">
-            {buttonLabel}
+            {buttonLabel ?? t(uiCopy.cta.whatsapp)}
           </WhatsAppButton>
         </AnimatedSection>
       </div>
@@ -35,22 +39,13 @@ export function CtaBand({
   )
 }
 
-const MARQUEE_ITEMS = [
-  'E-commerce',
-  'Automação WhatsApp',
-  'Landing pages',
-  'Integrações API',
-  'SEO & performance',
-  'Responsivo mobile-first',
-  'Drone 4K',
-  'Laravel & PHP',
-  'Pagamento online',
-]
-
 export function Marquee() {
-  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
+  const { t } = useLocale()
+  const marqueeItems = t(uiCopy.ctaBand.marquee)
+  const items = [...marqueeItems, ...marqueeItems]
+
   return (
-    <div className="marquee-wrap" aria-label="Tecnologias e serviços">
+    <div className="marquee-wrap" aria-label={t(uiCopy.common.marqueeLabel)}>
       <div className="marquee">
         <div className="marquee__track">
           {items.map((item, i) => (
@@ -64,31 +59,18 @@ export function Marquee() {
   )
 }
 
-const DIFF_ITEMS = [
-  {
-    title: 'Entrega ágil sem perder qualidade',
-    text: 'Processo eficiente e escopo fechado — você sabe o que vai receber e quando.',
-  },
-  {
-    title: 'Preço transparente, sem surpresas',
-    text: 'Orçamento claro desde o primeiro contato. Pacotes com investimento definido.',
-  },
-  {
-    title: '100% responsivo no celular',
-    text: 'Mais de 70% dos acessos vêm do smartphone. Seu site funciona em qualquer tela.',
-  },
-  {
-    title: 'Suporte humano e contínuo',
-    text: 'Não é robô — é atendimento direto com quem construiu seu projeto.',
-  },
-]
-
 export function DiffGrid() {
+  const { t } = useLocale()
+  const diffItems = uiCopy.ctaBand.diffItems.map((item) => ({
+    title: t(item.title),
+    text: t(item.text),
+  }))
+
   return (
     <div className="diff-grid">
-      {DIFF_ITEMS.map((item, i) => (
+      {diffItems.map((item, i) => (
         <AnimatedSection key={item.title} delay={i + 1} className="diff-card">
-          <span className="diff-card__tag">Diferencial</span>
+          <span className="diff-card__tag">{t(uiCopy.common.diffTag)}</span>
           <h3>{item.title}</h3>
           <p>{item.text}</p>
         </AnimatedSection>

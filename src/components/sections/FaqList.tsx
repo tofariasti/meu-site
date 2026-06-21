@@ -1,16 +1,15 @@
-import { hubConfig } from '../../data/hubConfig'
-import { AnimatedSection } from '../ui/AnimatedSection'
+import { useHubConfig } from '../../i18n/useHubConfig'
 
 export function FaqList() {
+  const config = useHubConfig()
+
   return (
     <div className="faq-list">
-      {hubConfig.seo.faq.map((item, i) => (
-        <AnimatedSection key={item.pergunta} delay={(i % 3) + 1}>
-          <details className="faq-item">
-            <summary className="faq-item__question">{item.pergunta}</summary>
-            <p className="faq-item__answer">{item.resposta}</p>
-          </details>
-        </AnimatedSection>
+      {config.seo.faq.map((item, i) => (
+        <details key={item.pergunta} className="faq-item" open={i === 0}>
+          <summary>{item.pergunta}</summary>
+          <p>{item.resposta}</p>
+        </details>
       ))}
     </div>
   )

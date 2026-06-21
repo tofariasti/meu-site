@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom'
-import { hubConfig } from '../../data/hubConfig'
+import { useHubConfig } from '../../i18n/useHubConfig'
+import { useLocale } from '../../i18n/LocaleContext'
+import { uiCopy } from '../../data/uiCopy'
 import { buildWhatsAppUrl } from '../../utils/whatsapp'
 import { AnimatedSection } from '../ui/AnimatedSection'
+import type { IntentItem } from '../../data/types'
 
-export function IntentGrid({ items = hubConfig.intentItems }) {
+export function IntentGrid({ items }: { items?: IntentItem[] }) {
+  const config = useHubConfig()
+  const { t, pathFor } = useLocale()
+  const intentItems = items ?? config.intentItems
+
   return (
     <div className="intent-grid">
-      {items.map((item, i) => {
-        const linkText = item.externo ? 'Saiba mais →' : 'Ver opções →'
+      {intentItems.map((item, i) => {
+        const linkText = item.externo ? t(uiCopy.common.learnMore) : t(uiCopy.common.seeOptions)
         const content = (
           <>
             <h3 className="intent-card__title">{item.titulo}</h3>
@@ -46,7 +53,8 @@ export function IntentGrid({ items = hubConfig.intentItems }) {
           )
         }
 
-        const href = item.href ?? item.anchor ?? '#pacotes'
+        const rawHref = item.href ?? item.anchor ?? '#pacotes'
+        const href = rawHref.startsWith('http') ? rawHref : pathFor(rawHref)
         const isExternal = href.startsWith('http')
         return (
           <AnimatedSection key={item.titulo} delay={i + 1}>

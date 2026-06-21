@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { hubConfig } from '../../data/hubConfig'
+import { useHubConfig } from '../../i18n/useHubConfig'
+import { useLocale } from '../../i18n/LocaleContext'
+import { uiCopy } from '../../data/uiCopy'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
-
-const ROTATE_WORDS = ['converte.', 'aparece no Google.', 'gera clientes.', 'vende no WhatsApp.']
 
 interface HeroHomeProps {
   compact?: boolean
@@ -19,25 +19,32 @@ interface HeroHomeProps {
 
 export function HeroHome({
   compact = false,
-  label = 'Farias Digital · MEI · Nota Fiscal',
-  titleLines = ['Presença digital que', 'converte.'],
-  subtitle = 'Hub digital para PMEs — explore pacotes, exemplos e respostas antes de pedir orçamento. Atendimento direto com quem desenvolve.',
+  label,
+  titleLines,
+  subtitle,
   showPreview = true,
   showPricingTags = false,
   actions,
 }: HeroHomeProps) {
+  const config = useHubConfig()
+  const { t, pathFor } = useLocale()
   const reduced = useReducedMotion()
   const [wordIndex, setWordIndex] = useState(0)
+
+  const resolvedLabel = label ?? t(uiCopy.hero.defaultLabel)
+  const resolvedTitleLines = titleLines ?? [t(uiCopy.hero.defaultTitle1), t(uiCopy.hero.rotateWords)[0]] as [string, string]
+  const resolvedSubtitle = subtitle ?? t(uiCopy.hero.defaultSubtitle)
+  const rotateWords = t(uiCopy.hero.rotateWords)
 
   useEffect(() => {
     if (reduced || compact) return
     const id = window.setInterval(() => {
-      setWordIndex((i) => (i + 1) % ROTATE_WORDS.length)
+      setWordIndex((i) => (i + 1) % rotateWords.length)
     }, 3200)
     return () => window.clearInterval(id)
-  }, [compact, reduced])
+  }, [compact, reduced, rotateWords.length])
 
-  const accentWord = compact ? titleLines[1] : ROTATE_WORDS[wordIndex]
+  const accentWord = compact ? resolvedTitleLines[1] : rotateWords[wordIndex]
 
   return (
     <section className={`hero${compact ? ' hero--compact' : ' hero--home'}`}>
@@ -46,12 +53,12 @@ export function HeroHome({
           <AnimatedSection>
             <span className="hero__label">
               <span className="hero__label-dot" aria-hidden="true" />
-              {label}
+              {resolvedLabel}
             </span>
           </AnimatedSection>
           <AnimatedSection delay={1}>
             <h1 className="hero__title">
-              <span className="hero__title-line">{titleLines[0]}</span>
+              <span className="hero__title-line">{resolvedTitleLines[0]}</span>
               <span className="hero__title-line hero__title-line--accent">
                 {compact ? (
                   accentWord
@@ -76,18 +83,18 @@ export function HeroHome({
             </h1>
           </AnimatedSection>
           <AnimatedSection delay={2}>
-            <p className="hero__subtitle">{subtitle}</p>
+            <p className="hero__subtitle">{resolvedSubtitle}</p>
           </AnimatedSection>
           {showPricingTags && (
             <AnimatedSection delay={2}>
               <div className="hero-pricing-tags">
                 <span className="hero-pricing-tag">
-                  <span className="hero-pricing-tag__label">Landing page</span>
-                  <span className="hero-pricing-tag__price">a partir de R$ 300</span>
+                  <span className="hero-pricing-tag__label">{t(uiCopy.hero.landingTag)}</span>
+                  <span className="hero-pricing-tag__price">{t(uiCopy.hero.from300)}</span>
                 </span>
                 <span className="hero-pricing-tag">
-                  <span className="hero-pricing-tag__label">Site institucional</span>
-                  <span className="hero-pricing-tag__price">a partir de R$ 1.490</span>
+                  <span className="hero-pricing-tag__label">{t(uiCopy.hero.institutionalTag)}</span>
+                  <span className="hero-pricing-tag__price">{t(uiCopy.hero.from1490)}</span>
                 </span>
               </div>
             </AnimatedSection>
@@ -95,11 +102,11 @@ export function HeroHome({
           <AnimatedSection delay={3}>
             {actions ?? (
               <div className="hero__actions">
-                <Link to="/sites/" className="btn btn--primary btn--lg">
-                  Ver pacotes e preços
+                <Link to={pathFor('/sites/')} className="btn btn--primary btn--lg">
+                  {t(uiCopy.cta.viewPackages)}
                 </Link>
-                <Link to="/portfolio/" className="btn btn--outline btn--lg">
-                  Ver exemplos
+                <Link to={pathFor('/portfolio/')} className="btn btn--outline btn--lg">
+                  {t(uiCopy.cta.viewExamples)}
                 </Link>
               </div>
             )}
@@ -107,9 +114,9 @@ export function HeroHome({
           {!compact && (
             <AnimatedSection delay={4}>
               <ul className="hero__trust">
-                <li>40+ modelos por segmento</li>
-                <li>Retorno em até 24h</li>
-                <li>Atendimento em todo o Brasil</li>
+                <li>{t(uiCopy.hero.trustModels)}</li>
+                <li>{t(uiCopy.hero.trustResponse)}</li>
+                <li>{config.cidadeRegiao}</li>
               </ul>
             </AnimatedSection>
           )}
@@ -130,7 +137,7 @@ export function HeroHome({
                 <span className="hero-mockup__dot hero-mockup__dot--y" />
                 <span className="hero-mockup__dot hero-mockup__dot--g" />
                 <span className="browser-preview__url">
-                  amo-patas.demo · {hubConfig.dominioHost}
+                  amo-patas.demo · {config.dominioHost}
                 </span>
               </div>
               <div className="browser-preview__screen">
@@ -143,8 +150,8 @@ export function HeroHome({
               </div>
             </div>
             <div className="hero-visual__chips">
-              <span className="preview-chip preview-chip--success">Referência visual</span>
-              <span className="preview-chip preview-chip--accent">Leads via WhatsApp</span>
+              <span className="preview-chip preview-chip--success">{t(uiCopy.common.visualReference)}</span>
+              <span className="preview-chip preview-chip--accent">{t(uiCopy.common.leadsWhatsApp)}</span>
             </div>
           </AnimatedSection>
         )}
