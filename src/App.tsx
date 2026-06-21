@@ -8,25 +8,43 @@ import { PorQueSitePage } from './pages/PorQueSitePage'
 import { DronePage } from './pages/DronePage'
 import { SobrePage } from './pages/SobrePage'
 import { useAnalytics } from './hooks/useAnalytics'
+import { LocaleProvider } from './i18n/LocaleContext'
 
-function AppRoutes() {
+function routePath(prefix: string, path: string): string {
+  if (path === '/') return prefix ? `${prefix}/` : '/'
+  const segment = path.startsWith('/') ? path.slice(1) : path
+  return `${prefix}/${segment}`
+}
+
+function LocaleRouteTree({ prefix }: { prefix: string }) {
   useAnalytics()
 
   return (
+    <>
+      <Route path={routePath(prefix, '/')} element={<HomePage />} />
+      <Route path={routePath(prefix, '/sites')} element={<Navigate to={routePath(prefix, '/sites/')} replace />} />
+      <Route path={routePath(prefix, '/sites/')} element={<SitesPage />} />
+      <Route path={routePath(prefix, '/portfolio')} element={<Navigate to={routePath(prefix, '/portfolio/')} replace />} />
+      <Route path={routePath(prefix, '/portfolio/')} element={<PortfolioPage />} />
+      <Route path={routePath(prefix, '/faq')} element={<Navigate to={routePath(prefix, '/faq/')} replace />} />
+      <Route path={routePath(prefix, '/faq/')} element={<FaqPage />} />
+      <Route path={routePath(prefix, '/por-que-site')} element={<Navigate to={routePath(prefix, '/por-que-site/')} replace />} />
+      <Route path={routePath(prefix, '/por-que-site/')} element={<PorQueSitePage />} />
+      <Route path={routePath(prefix, '/drone')} element={<Navigate to={routePath(prefix, '/drone/')} replace />} />
+      <Route path={routePath(prefix, '/drone/')} element={<DronePage />} />
+      <Route path={routePath(prefix, '/sobre')} element={<Navigate to={routePath(prefix, '/sobre/')} replace />} />
+      <Route path={routePath(prefix, '/sobre/')} element={<SobrePage />} />
+    </>
+  )
+}
+
+function AppRoutes() {
+  return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/sites" element={<Navigate to="/sites/" replace />} />
-      <Route path="/sites/" element={<SitesPage />} />
-      <Route path="/portfolio" element={<Navigate to="/portfolio/" replace />} />
-      <Route path="/portfolio/" element={<PortfolioPage />} />
-      <Route path="/faq" element={<Navigate to="/faq/" replace />} />
-      <Route path="/faq/" element={<FaqPage />} />
-      <Route path="/por-que-site" element={<Navigate to="/por-que-site/" replace />} />
-      <Route path="/por-que-site/" element={<PorQueSitePage />} />
-      <Route path="/drone" element={<Navigate to="/drone/" replace />} />
-      <Route path="/drone/" element={<DronePage />} />
-      <Route path="/sobre" element={<Navigate to="/sobre/" replace />} />
-      <Route path="/sobre/" element={<SobrePage />} />
+      <Route path="/pt/*" element={<Navigate to="/" replace />} />
+      <LocaleRouteTree prefix="" />
+      <LocaleRouteTree prefix="/en" />
+      <LocaleRouteTree prefix="/es" />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
@@ -35,9 +53,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <SiteLayout>
-        <AppRoutes />
-      </SiteLayout>
+      <LocaleProvider>
+        <SiteLayout>
+          <AppRoutes />
+        </SiteLayout>
+      </LocaleProvider>
     </BrowserRouter>
   )
 }

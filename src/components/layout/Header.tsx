@@ -1,25 +1,21 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { hubConfig } from '../../data/hubConfig'
+import { useHubConfig } from '../../i18n/useHubConfig'
+import { useLocale } from '../../i18n/LocaleContext'
+import { LOCALES } from '../../i18n/types'
+import { uiCopy } from '../../data/uiCopy'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
 
-const navItems = [
-  { to: '/', label: 'Início', end: true },
-  { to: '/sites/', label: 'Pacotes' },
-  { to: '/portfolio/', label: 'Portfólio' },
-  { to: '/faq/', label: 'FAQ' },
-  { to: 'https://techdrone360.com.br/', label: 'Drone', external: true },
-  { to: '/sobre/', label: 'Sobre' },
-] as const
-
 function Logo() {
-  const marca = hubConfig.marca
+  const config = useHubConfig()
+  const { pathFor } = useLocale()
+  const marca = config.marca
   const parts = marca.trim().split(/\s+/)
 
   return (
-    <Link to="/" className="logo" aria-label={hubConfig.marcaLogoAlt}>
+    <Link to={pathFor('/')} className="logo" aria-label={config.marcaLogoAlt}>
       <img
-        src={hubConfig.marcaLogoIcon}
+        src={config.marcaLogoIcon}
         alt=""
         className="logo__icon"
         width={32}
@@ -42,12 +38,23 @@ function Logo() {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t, pathFor, locale, setLocale } = useLocale()
+  const config = useHubConfig()
+
+  const navItems = [
+    { to: pathFor('/'), label: t(uiCopy.nav.home), end: true },
+    { to: pathFor('/sites/'), label: t(uiCopy.nav.packages) },
+    { to: pathFor('/portfolio/'), label: t(uiCopy.nav.portfolio) },
+    { to: pathFor('/faq/'), label: t(uiCopy.nav.faq) },
+    { to: config.links.techdrone360, label: t(uiCopy.nav.drone), external: true as const },
+    { to: pathFor('/sobre/'), label: t(uiCopy.nav.about) },
+  ]
 
   return (
     <header className="site-header">
       <div className="container site-header__inner">
         <Logo />
-        <nav aria-label="Principal">
+        <nav aria-label={t(uiCopy.nav.home)}>
           <ul className="site-nav">
             {navItems.map((item) => (
               <li key={item.label}>
@@ -62,8 +69,21 @@ export function Header() {
                 )}
               </li>
             ))}
+            <li className="lang-switch" role="group" aria-label={t(uiCopy.lang.group)}>
+              {LOCALES.map((lang) => (
+                <button
+                  key={lang}
+                  type="button"
+                  className={`lang-btn${locale === lang ? ' lang-btn--active' : ''}`}
+                  aria-pressed={locale === lang}
+                  onClick={() => setLocale(lang)}
+                >
+                  {lang.toUpperCase()}
+                </button>
+              ))}
+            </li>
             <li>
-              <WhatsAppButton waKey="geral">Vamos conversar</WhatsAppButton>
+              <WhatsAppButton waKey="geral">{t(uiCopy.cta.chat)}</WhatsAppButton>
             </li>
           </ul>
         </nav>
@@ -74,7 +94,7 @@ export function Header() {
           aria-controls="mobile-nav"
           onClick={() => setMobileOpen((o) => !o)}
         >
-          <span className="sr-only">Menu</span>
+          <span className="sr-only">{t(uiCopy.cta.menu)}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16" />
           </svg>
@@ -104,8 +124,24 @@ export function Header() {
             </NavLink>
           ),
         )}
+        <div className="lang-switch lang-switch--mobile" role="group" aria-label={t(uiCopy.lang.group)}>
+          {LOCALES.map((lang) => (
+            <button
+              key={lang}
+              type="button"
+              className={`lang-btn${locale === lang ? ' lang-btn--active' : ''}`}
+              aria-pressed={locale === lang}
+              onClick={() => {
+                setLocale(lang)
+                setMobileOpen(false)
+              }}
+            >
+              {lang.toUpperCase()}
+            </button>
+          ))}
+        </div>
         <WhatsAppButton waKey="geral" className="btn btn--whatsapp btn--block">
-          Vamos conversar
+          {t(uiCopy.cta.chat)}
         </WhatsAppButton>
       </div>
     </header>
