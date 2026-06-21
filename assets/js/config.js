@@ -319,6 +319,13 @@ Obrigado!`,
       descricao: 'Landing page de conversão (IMC, WhatsApp, depoimentos) + painel administrativo demo para pacientes e planos alimentares — sem backend.',
     },
     {
+      titulo: 'Ótica Visão Clara',
+      segmento: 'Saúde',
+      url: 'https://tofariasti.github.io/landing-otica/',
+      badge: 'Landing + Admin',
+      descricao: 'Landing de conversão (quiz de rosto, marcas, WhatsApp) + painel demo para clientes, pedidos/receitas e catálogo de armações — sem backend.',
+    },
+    {
       titulo: 'Imobiliária',
       segmento: 'Imóveis',
       url: 'https://tofariasti.github.io/landing-imobiliaria/',
