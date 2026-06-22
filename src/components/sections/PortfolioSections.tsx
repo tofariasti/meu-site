@@ -1,9 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useHubConfig } from '../../i18n/useHubConfig'
 import { useLocale } from '../../i18n/LocaleContext'
 import { uiCopy } from '../../data/uiCopy'
 import { segmentLocalized } from '../../data/segmentsLocalized'
 import { buildDemoWhatsAppUrl } from '../../utils/whatsapp'
+import {
+  PORTFOLIO_SEGMENT_PARAM,
+  resolveSegmentFromSlug,
+  segmentSlugForLabel,
+} from '../../utils/portfolioSegment'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
 import type { Demo } from '../../data/types'
@@ -67,11 +73,17 @@ function DemoCard({ demo, index }: { demo: Demo; index: number }) {
 export function DemoGrid() {
   const config = useHubConfig()
   const { t } = useLocale()
+  const [searchParams, setSearchParams] = useSearchParams()
   const barRef = useRef<HTMLDivElement>(null)
 
   const segmentOrder = useMemo(
     () => Object.values(segmentLocalized).map((seg) => t(seg)),
     [t],
+  )
+
+  const availableSegments = useMemo(
+    () => new Set(config.demos.map((d) => d.segmento)),
+    [config.demos],
   )
 
   const counts = useMemo(() => {
@@ -83,17 +95,31 @@ export function DemoGrid() {
   }, [config.demos])
 
   const segmentos = useMemo(() => {
-    const available = new Set(config.demos.map((d) => d.segmento))
-    const ordered = segmentOrder.filter((seg) => available.has(seg))
+    const ordered = segmentOrder.filter((seg) => availableSegments.has(seg))
     return ['todos', ...ordered]
-  }, [config.demos, segmentOrder])
+  }, [availableSegments, segmentOrder])
 
-  const [filter, setFilter] = useState('todos')
+  const filter = useMemo(() => {
+    const slug = searchParams.get(PORTFOLIO_SEGMENT_PARAM)
+    if (!slug) return 'todos'
+    const segment = resolveSegmentFromSlug(slug, t)
+    if (!segment || !availableSegments.has(segment)) return 'todos'
+    return segment
+  }, [availableSegments, searchParams, t])
 
   const filtered =
     filter === 'todos'
       ? config.demos
       : config.demos.filter((d) => d.segmento === filter)
+
+  const selectFilter = (seg: string) => {
+    if (seg === 'todos') {
+      setSearchParams({}, { replace: true })
+      return
+    }
+    const slug = segmentSlugForLabel(seg, t)
+    if (slug) setSearchParams({ [PORTFOLIO_SEGMENT_PARAM]: slug }, { replace: true })
+  }
 
   useEffect(() => {
     const bar = barRef.current
@@ -123,7 +149,7 @@ export function DemoGrid() {
                 role="tab"
                 aria-selected={isActive}
                 className={`filter-btn${isActive ? ' is-active' : ''}`}
-                onClick={() => setFilter(seg)}
+                onClick={() => selectFilter(seg)}
               >
                 <span className="filter-btn__label">{label}</span>
                 <span className="filter-btn__count" aria-hidden="true">

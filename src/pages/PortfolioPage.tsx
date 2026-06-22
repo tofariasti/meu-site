@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { PageMeta } from '../components/ui/PageMeta'
 import {
   DemoGrid,
@@ -11,11 +13,18 @@ import { useLocale } from '../i18n/LocaleContext'
 import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
+import { PORTFOLIO_SEGMENT_PARAM } from '../utils/portfolioSegment'
 
 export function PortfolioPage() {
   const config = useHubConfig()
   const { t } = useLocale()
+  const [searchParams] = useSearchParams()
   const p = config.portfolio
+
+  useEffect(() => {
+    if (!searchParams.get(PORTFOLIO_SEGMENT_PARAM)) return
+    document.getElementById('demos-root')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [searchParams])
 
   return (
     <>

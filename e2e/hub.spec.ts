@@ -91,15 +91,32 @@ test.describe('Responsiveness', () => {
     await page.setViewportSize({ width: 768, height: 1024 })
     await page.goto('/portfolio/')
     await page.getByRole('tab', { name: 'Saúde' }).click()
+    await expect(page).toHaveURL(/segmento=saude/)
     await expect(page.locator('.demo-card').first()).toBeVisible()
     await expect(page.locator('.filter-meta__segment')).toHaveText('· Saúde')
+  })
+
+  test('portfolio opens filtered from ?segmento= query (PT)', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 })
+    await page.goto('/portfolio/?segmento=automotivo')
+    await expect(page.getByRole('tab', { name: 'Automotivo' })).toHaveAttribute('aria-selected', 'true')
+    await expect(page.locator('.filter-meta__segment')).toHaveText('· Automotivo')
+    await expect(page.locator('.demo-card')).toHaveCount(6)
   })
 
   test('portfolio filter works on tablet (EN)', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 })
     await page.goto('/en/portfolio/')
     await page.getByRole('tab', { name: 'Health' }).click()
+    await expect(page).toHaveURL(/segmento=saude/)
     await expect(page.locator('.demo-card').first()).toBeVisible()
+    await expect(page.locator('.filter-meta__segment')).toHaveText('· Health')
+  })
+
+  test('portfolio opens filtered from ?segmento= query (EN)', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 })
+    await page.goto('/en/portfolio/?segmento=saude')
+    await expect(page.getByRole('tab', { name: 'Health' })).toHaveAttribute('aria-selected', 'true')
     await expect(page.locator('.filter-meta__segment')).toHaveText('· Health')
   })
 
