@@ -70,6 +70,18 @@ export const uiCopy = {
     filterAll: L('Todos', 'All', 'Todos'),
     filterBySegment: L('Filtrar por segmento', 'Filter by industry', 'Filtrar por segmento'),
     filterModels: L('modelos', 'templates', 'modelos'),
+    searchModels: L('Buscar modelos', 'Search templates', 'Buscar modelos'),
+    searchModelsPlaceholder: L(
+      'Buscar modelo (ex.: pet shop, barbearia, imóveis…)',
+      'Search templates (e.g. pet shop, barber, real estate…)',
+      'Buscar modelo (ej.: pet shop, barbería, inmuebles…)',
+    ),
+    searchNoResults: L(
+      'Nenhum modelo encontrado para essa busca.',
+      'No templates match your search.',
+      'Ningún modelo coincide con esa búsqueda.',
+    ),
+    clearSearch: L('Limpar busca', 'Clear search', 'Limpiar búsqueda'),
     notIncluded: L('Não inclui:', 'Not included:', 'No incluye:'),
     diffTag: L('Diferencial', 'Differentiator', 'Diferencial'),
     affordableInvestment: L('Investimento acessível', 'Affordable investment', 'Inversión accesible'),

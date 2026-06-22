@@ -126,6 +126,25 @@ test.describe('Responsiveness', () => {
     await expect(page.locator('.filter-meta__segment')).toHaveText('· Health')
   })
 
+  test('portfolio text search filters demos (PT)', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 })
+    await page.goto('/portfolio/')
+    const search = page.getByRole('searchbox', { name: 'Buscar modelos' })
+    await search.fill('barbearia')
+    await expect(page.locator('.demo-card')).toHaveCount(1)
+    await expect(page.locator('.demo-card__title')).toHaveText('Barbearia')
+    await expect(page.locator('.filter-meta__query')).toHaveText('· “barbearia”')
+  })
+
+  test('portfolio text search combines with segment filter (PT)', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 })
+    await page.goto('/portfolio/?segmento=saude')
+    const search = page.getByRole('searchbox', { name: 'Buscar modelos' })
+    await search.fill('barbearia')
+    await expect(page.locator('.filter-empty')).toBeVisible()
+    await expect(page.locator('.demo-card')).toHaveCount(0)
+  })
+
   test('hero shows two columns at 1280px', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 })
     await page.goto('/')

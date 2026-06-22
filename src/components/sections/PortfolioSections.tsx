@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useHubConfig } from '../../i18n/useHubConfig'
 import { useLocale } from '../../i18n/LocaleContext'
@@ -10,6 +10,7 @@ import {
   resolveSegmentFromSlug,
   segmentSlugForLabel,
 } from '../../utils/portfolioSegment'
+import { filterDemosBySearch, normalizeSearchQuery } from '../../utils/portfolioSearch'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
 import type { Demo } from '../../data/types'
@@ -74,7 +75,9 @@ export function DemoGrid() {
   const config = useHubConfig()
   const { t } = useLocale()
   const [searchParams, setSearchParams] = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState('')
   const barRef = useRef<HTMLDivElement>(null)
+  const normalizedSearchQuery = normalizeSearchQuery(searchQuery)
 
   const segmentOrder = useMemo(
     () => Object.values(segmentLocalized).map((seg) => t(seg)),
@@ -107,10 +110,11 @@ export function DemoGrid() {
     return segment
   }, [availableSegments, searchParams, t])
 
-  const filtered =
-    filter === 'todos'
-      ? config.demos
-      : config.demos.filter((d) => d.segmento === filter)
+  const filtered = useMemo(() => {
+    const bySegment =
+      filter === 'todos' ? config.demos : config.demos.filter((d) => d.segmento === filter)
+    return filterDemosBySearch(bySegment, searchQuery)
+  }, [config.demos, filter, searchQuery])
 
   const selectFilter = (seg: string) => {
     if (seg === 'todos') {
@@ -130,34 +134,57 @@ export function DemoGrid() {
 
   return (
     <>
-      <div className="filter-bar-wrap">
-        <div
-          ref={barRef}
-          className="filter-bar"
-          role="tablist"
-          aria-label={t(uiCopy.common.filterBySegment)}
-        >
-          {segmentos.map((seg) => {
-            const isActive = filter === seg
-            const count = seg === 'todos' ? config.demos.length : (counts.get(seg) ?? 0)
-            const label = seg === 'todos' ? t(uiCopy.common.filterAll) : seg
+      <div className="filter-toolbar">
+        <div className="filter-search">
+          <svg
+            className="filter-search__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input
+            type="search"
+            className="filter-search__input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={t(uiCopy.common.searchModelsPlaceholder)}
+            aria-label={t(uiCopy.common.searchModels)}
+          />
+        </div>
+        <div className="filter-bar-wrap">
+          <div
+            ref={barRef}
+            className="filter-bar"
+            role="tablist"
+            aria-label={t(uiCopy.common.filterBySegment)}
+          >
+            {segmentos.map((seg) => {
+              const isActive = filter === seg
+              const count = seg === 'todos' ? config.demos.length : (counts.get(seg) ?? 0)
+              const label = seg === 'todos' ? t(uiCopy.common.filterAll) : seg
 
-            return (
-              <button
-                key={seg}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                className={`filter-btn${isActive ? ' is-active' : ''}`}
-                onClick={() => selectFilter(seg)}
-              >
-                <span className="filter-btn__label">{label}</span>
-                <span className="filter-btn__count" aria-hidden="true">
-                  {count}
-                </span>
-              </button>
-            )
-          })}
+              return (
+                <button
+                  key={seg}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`filter-btn${isActive ? ' is-active' : ''}`}
+                  onClick={() => selectFilter(seg)}
+                >
+                  <span className="filter-btn__label">{label}</span>
+                  <span className="filter-btn__count" aria-hidden="true">
+                    {count}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       </div>
       <p className="filter-meta" aria-live="polite">
@@ -169,12 +196,27 @@ export function DemoGrid() {
             <span className="filter-meta__segment">· {filter}</span>
           </>
         )}
+        {normalizedSearchQuery && (
+          <>
+            {' '}
+            <span className="filter-meta__query">· “{searchQuery.trim()}”</span>
+          </>
+        )}
       </p>
-      <div className="demo-grid">
-        {filtered.map((demo, i) => (
-          <DemoCard key={demo.url} demo={demo} index={i} />
-        ))}
-      </div>
+      {filtered.length === 0 ? (
+        <div className="filter-empty">
+          <p className="filter-empty__text">{t(uiCopy.common.searchNoResults)}</p>
+          <button type="button" className="btn btn--outline btn--sm" onClick={() => setSearchQuery('')}>
+            {t(uiCopy.common.clearSearch)}
+          </button>
+        </div>
+      ) : (
+        <div className="demo-grid">
+          {filtered.map((demo, i) => (
+            <DemoCard key={demo.url} demo={demo} index={i} />
+          ))}
+        </div>
+      )}
     </>
   )
 }
