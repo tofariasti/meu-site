@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
+async function expectHubPage(page: import('@playwright/test').Page, route: string) {
+  await page.goto(route, { waitUntil: 'domcontentloaded' })
+  await expect(page.locator('header.site-header')).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('main')).toBeVisible()
+}
+
 const ROUTES_PT = ['/', '/sites/', '/portfolio/', '/faq/', '/por-que-site/', '/drone/', '/sobre/']
 const ROUTES_EN = ROUTES_PT.map((r) => (r === '/' ? '/en/' : `/en${r}`))
 const ROUTES_ES = ROUTES_PT.map((r) => (r === '/' ? '/es/' : `/es${r}`))
@@ -8,25 +14,19 @@ const ROUTES_ES = ROUTES_PT.map((r) => (r === '/' ? '/es/' : `/es${r}`))
 test.describe('Hub navigation', () => {
   for (const route of ROUTES_PT) {
     test(`loads ${route}`, async ({ page }) => {
-      await page.goto(route)
-      await expect(page.locator('header.site-header')).toBeVisible()
-      await expect(page.locator('main')).toBeVisible()
+      await expectHubPage(page, route)
     })
   }
 
   for (const route of ROUTES_EN) {
     test(`loads EN ${route}`, async ({ page }) => {
-      await page.goto(route)
-      await expect(page.locator('header.site-header')).toBeVisible()
-      await expect(page.locator('main')).toBeVisible()
+      await expectHubPage(page, route)
     })
   }
 
   for (const route of ROUTES_ES) {
     test(`loads ES ${route}`, async ({ page }) => {
-      await page.goto(route)
-      await expect(page.locator('header.site-header')).toBeVisible()
-      await expect(page.locator('main')).toBeVisible()
+      await expectHubPage(page, route)
     })
   }
 
@@ -50,15 +50,17 @@ test.describe('Hub navigation', () => {
   })
 
   test('EN language switch shows English nav', async ({ page }) => {
-    await page.goto('/en/')
-    await expect(page.getByRole('link', { name: 'Packages', exact: true })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Portfolio', exact: true })).toBeVisible()
+    await expectHubPage(page, '/en/')
+    const nav = page.locator('header.site-header nav.site-header__nav')
+    await expect(nav.getByRole('link', { name: 'Packages', exact: true })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Portfolio', exact: true })).toBeVisible()
   })
 
   test('ES language switch shows Spanish nav', async ({ page }) => {
-    await page.goto('/es/')
-    await expect(page.getByRole('link', { name: 'Paquetes', exact: true })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Portafolio', exact: true })).toBeVisible()
+    await expectHubPage(page, '/es/')
+    const nav = page.locator('header.site-header nav.site-header__nav')
+    await expect(nav.getByRole('link', { name: 'Paquetes', exact: true })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Portafolio', exact: true })).toBeVisible()
   })
 })
 
@@ -77,25 +79,28 @@ test.describe('Hub a11y', () => {
 test.describe('Responsiveness', () => {
   test('mobile menu opens at 390px', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.goto('/')
+    await expectHubPage(page, '/')
     const toggle = page.locator('.nav-toggle')
     await expect(toggle).toBeVisible()
-    await toggle.click({ force: true })
+    await toggle.evaluate((el) => (el as HTMLButtonElement).click())
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
     await expect(page.locator('#mobile-nav')).toHaveClass(/is-open/)
   })
 
   test('portfolio filter works on tablet (PT)', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 })
     await page.goto('/portfolio/')
-    await page.getByRole('button', { name: 'Saúde' }).click()
+    await page.getByRole('tab', { name: 'Saúde' }).click()
     await expect(page.locator('.demo-card').first()).toBeVisible()
+    await expect(page.locator('.filter-meta__segment')).toHaveText('· Saúde')
   })
 
   test('portfolio filter works on tablet (EN)', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 })
     await page.goto('/en/portfolio/')
-    await page.getByRole('button', { name: 'Health' }).click()
+    await page.getByRole('tab', { name: 'Health' }).click()
     await expect(page.locator('.demo-card').first()).toBeVisible()
+    await expect(page.locator('.filter-meta__segment')).toHaveText('· Health')
   })
 
   test('hero shows two columns at 1280px', async ({ page }) => {

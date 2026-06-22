@@ -27,9 +27,9 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
-      - run: npx serve dist -l 8765 -s &
-      - run: npx wait-on http://127.0.0.1:8765/index.html
       - run: npm run test:e2e
+        env:
+          CI: true
 
   deploy:
     needs: test
