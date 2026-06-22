@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { SiteLayout } from './components/layout/SiteLayout'
 import { HomePage } from './pages/HomePage'
@@ -16,35 +17,36 @@ function routePath(prefix: string, path: string): string {
   return `${prefix}/${segment}`
 }
 
-function LocaleRouteTree({ prefix }: { prefix: string }) {
-  useAnalytics()
+function localeRoutes(prefix: string): ReactElement[] {
+  const key = prefix ? prefix.slice(1) : 'pt'
+  const p = (path: string) => routePath(prefix, path)
 
-  return (
-    <>
-      <Route path={routePath(prefix, '/')} element={<HomePage />} />
-      <Route path={routePath(prefix, '/sites')} element={<Navigate to={routePath(prefix, '/sites/')} replace />} />
-      <Route path={routePath(prefix, '/sites/')} element={<SitesPage />} />
-      <Route path={routePath(prefix, '/portfolio')} element={<Navigate to={routePath(prefix, '/portfolio/')} replace />} />
-      <Route path={routePath(prefix, '/portfolio/')} element={<PortfolioPage />} />
-      <Route path={routePath(prefix, '/faq')} element={<Navigate to={routePath(prefix, '/faq/')} replace />} />
-      <Route path={routePath(prefix, '/faq/')} element={<FaqPage />} />
-      <Route path={routePath(prefix, '/por-que-site')} element={<Navigate to={routePath(prefix, '/por-que-site/')} replace />} />
-      <Route path={routePath(prefix, '/por-que-site/')} element={<PorQueSitePage />} />
-      <Route path={routePath(prefix, '/drone')} element={<Navigate to={routePath(prefix, '/drone/')} replace />} />
-      <Route path={routePath(prefix, '/drone/')} element={<DronePage />} />
-      <Route path={routePath(prefix, '/sobre')} element={<Navigate to={routePath(prefix, '/sobre/')} replace />} />
-      <Route path={routePath(prefix, '/sobre/')} element={<SobrePage />} />
-    </>
-  )
+  return [
+    <Route key={`${key}-home`} path={p('/')} element={<HomePage />} />,
+    <Route key={`${key}-sites`} path={p('/sites')} element={<Navigate to={p('/sites/')} replace />} />,
+    <Route key={`${key}-sites-index`} path={p('/sites/')} element={<SitesPage />} />,
+    <Route key={`${key}-portfolio`} path={p('/portfolio')} element={<Navigate to={p('/portfolio/')} replace />} />,
+    <Route key={`${key}-portfolio-index`} path={p('/portfolio/')} element={<PortfolioPage />} />,
+    <Route key={`${key}-faq`} path={p('/faq')} element={<Navigate to={p('/faq/')} replace />} />,
+    <Route key={`${key}-faq-index`} path={p('/faq/')} element={<FaqPage />} />,
+    <Route key={`${key}-por-que-site`} path={p('/por-que-site')} element={<Navigate to={p('/por-que-site/')} replace />} />,
+    <Route key={`${key}-por-que-site-index`} path={p('/por-que-site/')} element={<PorQueSitePage />} />,
+    <Route key={`${key}-drone`} path={p('/drone')} element={<Navigate to={p('/drone/')} replace />} />,
+    <Route key={`${key}-drone-index`} path={p('/drone/')} element={<DronePage />} />,
+    <Route key={`${key}-sobre`} path={p('/sobre')} element={<Navigate to={p('/sobre/')} replace />} />,
+    <Route key={`${key}-sobre-index`} path={p('/sobre/')} element={<SobrePage />} />,
+  ]
 }
 
 function AppRoutes() {
+  useAnalytics()
+
   return (
     <Routes>
       <Route path="/pt/*" element={<Navigate to="/" replace />} />
-      <LocaleRouteTree prefix="" />
-      <LocaleRouteTree prefix="/en" />
-      <LocaleRouteTree prefix="/es" />
+      {localeRoutes('')}
+      {localeRoutes('/en')}
+      {localeRoutes('/es')}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
