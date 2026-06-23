@@ -355,6 +355,13 @@ Obrigado!`,
       descricao: 'Landing de conversão (quiz de rosto, marcas, WhatsApp) + painel demo para clientes, pedidos/receitas e catálogo de armações — sem backend.',
     },
     {
+      titulo: 'EURO MECHANIC — Autopeças',
+      segmento: 'Automotivo',
+      url: 'https://tofariasti.github.io/landing-auto-pecas/',
+      badge: 'Landing + Admin',
+      descricao: 'Landing de conversão (Deal of the Day, verificador de compatibilidade, carrinho WhatsApp) + painel demo para produtos, categorias, ofertas e banners — sem backend.',
+    },
+    {
       titulo: 'Imobiliária',
       segmento: 'Imóveis',
       url: 'https://tofariasti.github.io/landing-imobiliaria/',
