@@ -485,6 +485,39 @@ export const demosLocalized = [
       ),
     },
     {
+      titulo: L('Luna Valente — Astrologia', 'Luna Valente — Astrology', 'Luna Valente — Astrología'),
+      segmento: segmentLocalized.astrologia,
+      url: 'https://tofariasti.github.io/landing-astrologo/',
+      badge: L('Landing + Admin', 'Landing + Admin', 'Landing + Admin'),
+      descricao: L(
+        'Landing de conversão (SignFinder, WhatsApp) + painel demo para clientes, consultas e serviços astrológicos — sem backend.',
+        'Conversion landing (SignFinder, WhatsApp) + demo panel for clients, sessions and astrology services — no backend.',
+        'Landing de conversión (SignFinder, WhatsApp) + panel demo para clientes, consultas y servicios astrológicos — sin backend.',
+      ),
+    },
+    {
+      titulo: L('Cosmos Diário — Horóscopo', 'Cosmos Diário — Horoscope', 'Cosmos Diário — Horóscopo'),
+      segmento: segmentLocalized.astrologia,
+      url: 'https://tofariasti.github.io/landing-horoscopo/',
+      badge: L('Landing + Admin', 'Landing + Admin', 'Landing + Admin'),
+      descricao: L(
+        'Portal editorial (HoroscopePicker diário, WhatsApp) + painel demo para edições e leituras por signo — sem backend.',
+        'Editorial portal (daily HoroscopePicker, WhatsApp) + demo panel for editions and per-sign readings — no backend.',
+        'Portal editorial (HoroscopePicker diario, WhatsApp) + panel demo para ediciones y lecturas por signo — sin backend.',
+      ),
+    },
+    {
+      titulo: L('Céu & Números — Numerologia', 'Céu & Números — Numerology', 'Céu & Números — Numerología'),
+      segmento: segmentLocalized.astrologia,
+      url: 'https://tofariasti.github.io/landing-numerologia/',
+      badge: L('Landing + Admin', 'Landing + Admin', 'Landing + Admin'),
+      descricao: L(
+        'Landing de conversão (caminho de vida, WhatsApp) + painel demo para clientes, relatórios e serviços — sem backend.',
+        'Conversion landing (life path calculator, WhatsApp) + demo panel for clients, reports and services — no backend.',
+        'Landing de conversión (camino de vida, WhatsApp) + panel demo para clientes, informes y servicios — sin backend.',
+      ),
+    },
+    {
       titulo: L('Bubble Wash Lavanderia', 'Bubble Wash Lavanderia', 'Bubble Wash Lavanderia'),
       segmento: segmentLocalized.servicos,
       url: 'https://tofariasti.github.io/landing-lavanderia/',

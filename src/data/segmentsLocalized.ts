@@ -11,4 +11,5 @@ export const segmentLocalized = {
   gastronomia: L('Gastronomia', 'Food & Beverage', 'Gastronomía'),
   institucional: L('Institucional', 'Institutional', 'Institucional'),
   esporte: L('Esporte', 'Sports', 'Deportes'),
+  astrologia: L('Astrologia', 'Astrology', 'Astrología'),
 } as const
