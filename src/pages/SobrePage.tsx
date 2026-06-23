@@ -51,21 +51,51 @@ export function SobrePage() {
     <>
       <PageMeta page="sobre" />
       <section className="hero hero--compact">
-        <div className="container">
-          <AnimatedSection>
-            <p className="hero__eyebrow">
-              <span className="hero__eyebrow-dot" />
-              {t(uiCopy.common.whoAmI)}
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={1}>
-            <h1 className="hero__title">
-              <span className="hero__title-line">{t(uiCopy.sobre.title1)}</span>
-              <span className="hero__title-line hero__title-line--accent">{t(uiCopy.sobre.title2)}</span>
-            </h1>
-          </AnimatedSection>
-          <AnimatedSection delay={2}>
-            <p className="hero__subtitle">{t(uiCopy.sobre.subtitle)}</p>
+        <div className="container hero__grid">
+          <div className="hero__content">
+            <AnimatedSection>
+              <p className="hero__eyebrow">
+                <span className="hero__eyebrow-dot" />
+                {t(uiCopy.common.whoAmI)}
+              </p>
+            </AnimatedSection>
+            <AnimatedSection delay={1}>
+              <h1 className="hero__title">
+                <span className="hero__title-line">{t(uiCopy.sobre.title1)}</span>
+                <span className="hero__title-line hero__title-line--accent">{t(uiCopy.sobre.title2)}</span>
+              </h1>
+            </AnimatedSection>
+            <AnimatedSection delay={2}>
+              <p className="hero__subtitle">{t(uiCopy.sobre.subtitle)}</p>
+            </AnimatedSection>
+          </div>
+
+          <AnimatedSection delay={2} direction="right" className="hero-visual hero-visual--portrait">
+            <div className="hero-orbit" aria-hidden="true">
+              <span className="hero-orbit__ring hero-orbit__ring--1">
+                <span className="hero-orbit__dot" />
+              </span>
+              <span className="hero-orbit__ring hero-orbit__ring--2" />
+            </div>
+            <div className="hero-visual__glow" />
+            <div className="hero-portrait">
+              <img
+                className="hero-portrait__img"
+                src={config.fotoPerfil}
+                alt={config.nomeCompleto}
+                width={280}
+                height={280}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <div className="hero-visual__chips">
+              <span className="preview-chip preview-chip--accent">Laravel & APIs</span>
+              <span className="preview-chip preview-chip--success">{t(uiCopy.nav.drone)} DJI</span>
+              <span className="preview-chip preview-chip--tech">
+                {t(uiCopy.common.mei)} · {t(uiCopy.common.notaFiscal)}
+              </span>
+            </div>
           </AnimatedSection>
         </div>
       </section>
