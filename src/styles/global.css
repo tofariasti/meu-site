@@ -350,7 +350,7 @@ a:hover { color: var(--color-accent); }
   flex-shrink: 0;
 }
 
-.site-header__whatsapp {
+.site-header__actions .site-header__whatsapp {
   display: none;
 }
 
@@ -499,7 +499,7 @@ a:hover { color: var(--color-accent); }
 @media (min-width: 768px) {
   .site-header__nav { display: block; }
   .site-nav { display: flex; }
-  .site-header__whatsapp { display: inline-flex; }
+  .site-header__actions .site-header__whatsapp { display: inline-flex; }
   .nav-toggle { display: none; }
   .mobile-nav { display: none !important; }
 }
