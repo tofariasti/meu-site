@@ -6,6 +6,7 @@ import { useLocale } from '../i18n/LocaleContext'
 import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
+import { PageAnchors } from '../components/ui/PageAnchors'
 
 export function DronePage() {
   const config = useHubConfig()
@@ -25,9 +26,12 @@ export function DronePage() {
         showPreview={false}
         actions={
           <div className="hero__actions">
+            <a href="#pacote-drone" className="btn btn--primary btn--lg">
+              {t(uiCopy.anchors.dronePackage)}
+            </a>
             <a
               href={config.links.techdrone360}
-              className="btn btn--primary btn--lg"
+              className="btn btn--outline btn--lg"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -39,6 +43,13 @@ export function DronePage() {
           </div>
         }
       />
+
+      <div className="container">
+        <PageAnchors
+          className="page-anchors--center"
+          items={[{ id: 'pacote-drone', label: uiCopy.anchors.dronePackage }]}
+        />
+      </div>
 
       <section className="section section--alt">
         <div className="container">

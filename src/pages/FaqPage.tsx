@@ -20,6 +20,16 @@ export function FaqPage() {
         titleLines={[t(uiCopy.faq.title1), t(uiCopy.faq.title2)]}
         subtitle={t(uiCopy.faq.subtitle)}
         showPreview={false}
+        actions={
+          <div className="hero__actions">
+            <a href="#faq" className="btn btn--primary btn--lg">
+              {t(uiCopy.anchors.questions)}
+            </a>
+            <Link to={pathFor('/pacotes/')} className="btn btn--outline btn--lg">
+              {t(uiCopy.cta.viewPackages)}
+            </Link>
+          </div>
+        }
       />
 
       <section className="section section--alt" id="faq">

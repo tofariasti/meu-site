@@ -15,6 +15,7 @@ import { useLocale } from '../i18n/LocaleContext'
 import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
+import { PageAnchors } from '../components/ui/PageAnchors'
 
 export function HomePage() {
   const config = useHubConfig()
@@ -30,6 +31,19 @@ export function HomePage() {
         <ProofBar />
       </div>
       <CredibilityStrip />
+
+      <div className="container">
+        <PageAnchors
+          className="page-anchors--center"
+          items={[
+            { id: 'site-vs-instagram', label: uiCopy.anchors.comparison },
+            { id: 'servicos', label: uiCopy.anchors.services },
+            { id: 'objetivos', label: uiCopy.anchors.goals },
+            { id: 'explore', label: uiCopy.anchors.explore },
+            { id: 'como-trabalho', label: uiCopy.anchors.howIWork },
+          ]}
+        />
+      </div>
 
       <section className="section section--dark site-vs-insta" id="site-vs-instagram">
         <div className="container">
@@ -93,6 +107,11 @@ export function HomePage() {
             </WhatsAppButton>
           </AnimatedSection>
         </div>
+        <div className="section__next">
+          <a href="#objetivos" className="page-anchors__link">
+            {t(uiCopy.anchors.nextSection)} {t(uiCopy.anchors.goals)}
+          </a>
+        </div>
       </section>
 
       <Marquee />
@@ -111,6 +130,11 @@ export function HomePage() {
             lead={t(uiCopy.home.goalsLead)}
           />
           <IntentGrid />
+        </div>
+        <div className="section__next">
+          <a href="#explore" className="page-anchors__link">
+            {t(uiCopy.anchors.nextSection)} {t(uiCopy.anchors.explore)}
+          </a>
         </div>
       </section>
 
@@ -150,6 +174,11 @@ export function HomePage() {
               </Link>
             </AnimatedSection>
           </div>
+        </div>
+        <div className="section__next">
+          <a href="#como-trabalho" className="page-anchors__link">
+            {t(uiCopy.anchors.nextSection)} {t(uiCopy.anchors.howIWork)}
+          </a>
         </div>
       </section>
 

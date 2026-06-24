@@ -32,9 +32,14 @@ export function Footer() {
             <ul className="footer__links">
               <li><Link to={pathFor('/pacotes/')}>{t(uiCopy.nav.packagesFull)}</Link></li>
               <li><Link to={pathFor('/portfolio/')}>{t(uiCopy.nav.portfolio)}</Link></li>
+              <li><Link to={pathFor('/#servicos')}>{t(uiCopy.anchors.services)}</Link></li>
+              <li><Link to={pathFor('/#como-trabalho')}>{t(uiCopy.anchors.howIWork)}</Link></li>
+              <li><Link to={pathFor('/portfolio/#cases')}>{t(uiCopy.anchors.cases)}</Link></li>
               <li><Link to={pathFor('/por-que-site/')}>{t(uiCopy.nav.whySite)}</Link></li>
               <li><Link to={pathFor('/faq/')}>{t(uiCopy.nav.faqFull)}</Link></li>
+              <li><Link to={pathFor('/faq/#faq')}>{t(uiCopy.anchors.questions)}</Link></li>
               <li><Link to={pathFor('/computadores/')}>{t(uiCopy.nav.computers)}</Link></li>
+              <li><Link to={pathFor('/drone/#pacote-drone')}>{t(uiCopy.anchors.dronePackage)}</Link></li>
               <li><Link to={pathFor('/sobre/')}>{t(uiCopy.nav.about)}</Link></li>
             </ul>
           </AnimatedSection>

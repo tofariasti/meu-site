@@ -44,6 +44,21 @@ export const uiCopy = {
   lang: {
     group: L('Idioma', 'Language', 'Idioma'),
   },
+  anchors: {
+    group: L('Seções desta página', 'Sections on this page', 'Secciones de esta página'),
+    comparison: L('Comparativo', 'Comparison', 'Comparativo'),
+    services: L('Serviços', 'Services', 'Servicios'),
+    goals: L('Objetivos', 'Goals', 'Objetivos'),
+    explore: L('Explorar', 'Explore', 'Explorar'),
+    howIWork: L('Como trabalho', 'How I work', 'Cómo trabajo'),
+    packages: L('Pacotes', 'Packages', 'Paquetes'),
+    models: L('Modelos', 'Templates', 'Modelos'),
+    cases: L('Projetos reais', 'Real projects', 'Proyectos reales'),
+    credibility: L('Trajetória', 'Background', 'Trayectoria'),
+    questions: L('Perguntas', 'Questions', 'Preguntas'),
+    dronePackage: L('Pacote drone', 'Drone package', 'Paquete dron'),
+    nextSection: L('Próxima seção →', 'Next section →', 'Siguiente sección →'),
+  },
   footer: {
     nav: L('Navegação', 'Navigation', 'Navegación'),
     contact: L('Contato', 'Contact', 'Contacto'),

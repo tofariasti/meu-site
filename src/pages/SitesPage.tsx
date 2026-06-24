@@ -8,6 +8,7 @@ import { useLocale } from '../i18n/LocaleContext'
 import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
+import { PageAnchors } from '../components/ui/PageAnchors'
 
 export function SitesPage() {
   const { t, pathFor } = useLocale()
@@ -27,12 +28,25 @@ export function SitesPage() {
             <a href="#pacotes" className="btn btn--primary btn--lg">
               {t(uiCopy.cta.viewPackagesShort)}
             </a>
+            <a href="#servicos" className="btn btn--outline btn--lg">
+              {t(uiCopy.anchors.services)}
+            </a>
             <WhatsAppButton waKey="site" className="btn btn--whatsapp btn--lg">
               {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </div>
         }
       />
+
+      <div className="container">
+        <PageAnchors
+          className="page-anchors--center"
+          items={[
+            { id: 'servicos', label: uiCopy.anchors.services },
+            { id: 'pacotes', label: uiCopy.anchors.packages },
+          ]}
+        />
+      </div>
 
       <section className="section section--alt section--glow">
         <div className="container">
@@ -68,6 +82,11 @@ export function SitesPage() {
             lead={t(uiCopy.sites.servicesLead)}
           />
           <MiniServices />
+        </div>
+        <div className="section__next">
+          <a href="#pacotes" className="page-anchors__link">
+            {t(uiCopy.anchors.nextSection)} {t(uiCopy.anchors.packages)}
+          </a>
         </div>
       </section>
 

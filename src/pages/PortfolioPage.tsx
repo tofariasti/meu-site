@@ -13,6 +13,7 @@ import { useLocale } from '../i18n/LocaleContext'
 import { uiCopy } from '../data/uiCopy'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { WhatsAppButton } from '../components/ui/WhatsAppButton'
+import { PageAnchors } from '../components/ui/PageAnchors'
 import { PORTFOLIO_SEGMENT_PARAM } from '../utils/portfolioSegment'
 
 export function PortfolioPage() {
@@ -50,10 +51,22 @@ export function PortfolioPage() {
             <a href="#demos-root" className="btn btn--primary btn--lg">
               {t(uiCopy.cta.viewModels)}
             </a>
+            <a href="#cases" className="btn btn--outline btn--lg">
+              {t(uiCopy.anchors.cases)}
+            </a>
             <WhatsAppButton waKey="pacoteLanding" className="btn btn--whatsapp btn--lg">
               {t(uiCopy.cta.requestQuote)}
             </WhatsAppButton>
           </AnimatedSection>
+
+          <PageAnchors
+            className="page-anchors--center"
+            items={[
+              { id: 'demos-root', label: uiCopy.anchors.models },
+              { id: 'cases', label: uiCopy.anchors.cases },
+              { id: 'credibilidade', label: uiCopy.anchors.credibility },
+            ]}
+          />
 
           <div className="portfolio-group">
             <AnimatedSection className="portfolio-group__header">
@@ -89,6 +102,11 @@ export function PortfolioPage() {
             lead={t(uiCopy.portfolio.casesLead)}
           />
           <CasesGrid />
+        </div>
+        <div className="section__next">
+          <a href="#credibilidade" className="page-anchors__link">
+            {t(uiCopy.anchors.nextSection)} {t(uiCopy.anchors.credibility)}
+          </a>
         </div>
       </section>
 

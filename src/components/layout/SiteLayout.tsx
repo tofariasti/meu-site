@@ -4,6 +4,7 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { WhatsAppFloat } from '../ui/WhatsAppButton'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
+import { useHashScroll } from '../../hooks/useHashScroll'
 
 interface SiteLayoutProps {
   children: ReactNode
@@ -11,6 +12,7 @@ interface SiteLayoutProps {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   useScrollProgress()
+  useHashScroll()
 
   return (
     <>
