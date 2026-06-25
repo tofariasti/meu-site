@@ -88,6 +88,7 @@ export interface CaseItem {
   segmento: string
   descricao: string
   url?: string
+  imagem?: string
 }
 
 export interface TestimonialItem {

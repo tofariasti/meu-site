@@ -347,8 +347,8 @@ export const uiCopy = {
       'In the site preview, open the admin panel menu to simulate editing on your phone.',
       'En la vista previa del sitio, abra el menú del panel administrativo para simular la edición en el celular.',
     ),
-    casesTitleBefore: L('Cases em ', 'Cases in ', 'Cases en '),
-    casesTitleHighlight: L('produção', 'production', 'producción'),
+    casesTitleBefore: L('Projetos ', 'Personal ', 'Proyectos '),
+    casesTitleHighlight: L('Pessoais', 'Projects', 'Personales'),
     casesLead: L(
       'Sites e aplicações que desenvolvi — referências de qualidade técnica e conversão. Projetos corporativos citados na trajetória referem-se à atuação em equipe.',
       'Websites and apps I built — references of technical quality and conversion. Corporate projects in my career refer to team work.',

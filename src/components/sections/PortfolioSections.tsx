@@ -350,14 +350,21 @@ export function CasesGrid() {
     <div className="cases-grid">
       {config.cases.map((c, i) => (
         <AnimatedSection key={c.titulo} delay={i + 1} className="case-card">
-          <p className="case-card__segment">{c.segmento}</p>
-          <h3 className="case-card__title">{c.titulo}</h3>
-          <p className="case-card__desc">{c.descricao}</p>
-          {c.url && (
-            <a href={c.url} className="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
-              {t(uiCopy.cta.viewProject)}
-            </a>
+          {c.imagem && (
+            <div className="case-card__media">
+              <img src={c.imagem} alt={c.titulo} loading="lazy" decoding="async" />
+            </div>
           )}
+          <div className="case-card__body">
+            <p className="case-card__segment">{c.segmento}</p>
+            <h3 className="case-card__title">{c.titulo}</h3>
+            <p className="case-card__desc">{c.descricao}</p>
+            {c.url && (
+              <a href={c.url} className="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
+                {t(uiCopy.cta.viewProject)}
+              </a>
+            )}
+          </div>
         </AnimatedSection>
       ))}
     </div>
