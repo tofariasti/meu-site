@@ -78,6 +78,14 @@ export function ServiceIcon({ id, className }: ServiceIconProps) {
           <path d="M7 9h4M7 12h6" />
         </svg>
       )
+    case 'aplicativos':
+      return (
+        <svg {...iconProps} className={svgClass}>
+          <rect x="7" y="2" width="10" height="20" rx="2" />
+          <path d="M11 5h2" />
+          <rect x="9" y="8" width="6" height="10" rx="1" />
+        </svg>
+      )
     default:
       return (
         <svg {...iconProps} className={svgClass}>

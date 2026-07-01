@@ -37,7 +37,7 @@ export function PortfolioPage() {
   return (
     <>
       <PageMeta page="portfolio" />
-      <section className="section section--page-start portfolio-page" id="exemplos">
+      <section className="section section--page-start portfolio-page portfolio-page-hero" id="exemplos">
         <div className="container">
           <AnimatedSection>
             <span className="hero__label">
@@ -72,7 +72,9 @@ export function PortfolioPage() {
             </WhatsAppButton>
           </AnimatedSection>
 
-          <ProofBar />
+          <div className="features-bar features-bar--inline">
+            <ProofBar />
+          </div>
 
           <PageAnchors
             className="page-anchors--center"
@@ -106,7 +108,7 @@ export function PortfolioPage() {
         </div>
       </section>
 
-      <section className="section section--alt section--glow portfolio-page" id="cases">
+      <section className="section section--light section--glow portfolio-page" id="cases">
         <div className="container">
           <SectionHeader
             center

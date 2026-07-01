@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { PageMeta } from '../components/ui/PageMeta'
 import { HeroHome } from '../components/sections/HeroHome'
-import { StatsBar } from '../components/sections/StatsBar'
+import { AppDevHighlight } from '../components/sections/AppDevHighlight'
+import { ProofBar } from '../components/sections/ProofBar'
 import { CredibilityStrip } from '../components/sections/CredibilityStrip'
 import {
   ComparisonTable,
@@ -40,13 +41,15 @@ export function HomePage() {
             <Link to={pathFor('/portfolio/')} className="btn btn--outline btn--lg">
               {t(uiCopy.cta.viewExamples)}
             </Link>
-            <Link to={pathFor('/pacotes/')} className="btn btn--ghost btn--lg">
-              {t(uiCopy.cta.viewPackagesShort)}
-            </Link>
           </div>
         }
       />
-      <StatsBar />
+      <section className="features-bar" aria-label={t(uiCopy.common.marqueeLabel)}>
+        <div className="container">
+          <ProofBar />
+        </div>
+      </section>
+      <AppDevHighlight />
       <CredibilityStrip />
 
       <div className="container">
@@ -54,6 +57,7 @@ export function HomePage() {
           className="page-anchors--center"
           items={[
             { id: 'site-vs-instagram', label: uiCopy.anchors.comparison },
+            { id: 'apps-mobile', label: uiCopy.anchors.apps },
             { id: 'servicos', label: uiCopy.anchors.services },
             { id: 'modelos', label: uiCopy.anchors.templates },
             { id: 'segmentos', label: uiCopy.anchors.industries },
@@ -104,7 +108,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section section--glow" id="servicos">
+      <section className="section section--light section--glow" id="servicos">
         <div className="container">
           <SectionHeader
             center
@@ -236,8 +240,6 @@ export function HomePage() {
       </section>
 
       <TestimonialsSection />
-
-      <StatsBar />
 
       <CtaBand
         showBenefits

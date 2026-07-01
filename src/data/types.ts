@@ -72,8 +72,9 @@ export interface ComparativoItem {
 }
 
 export interface ProofBarItem {
-  valor: number
-  sufixo: string
+  titulo?: string
+  valor?: number
+  sufixo?: string
   label: string
   icon?: string
 }

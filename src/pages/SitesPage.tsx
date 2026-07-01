@@ -81,7 +81,7 @@ export function SitesPage() {
         </div>
       </section>
 
-      <section className="section section--glow" id="servicos">
+      <section className="section section--light section--glow" id="servicos">
         <div className="container">
           <SectionHeader
             center
@@ -120,7 +120,7 @@ export function SitesPage() {
         </div>
       </section>
 
-      <section className="section section--alt">
+      <section className="section section--light">
         <div className="container">
           <SectionHeader eyebrow={t(uiCopy.sites.processEyebrow)} title={t(uiCopy.sites.processTitle)} />
           <ProcessSteps />

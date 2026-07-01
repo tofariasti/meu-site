@@ -230,9 +230,9 @@ Para agilizar:
   seo: {
     ogImage: HUB_DOMINIO + '/assets/img/og-image.png',
     descriptionDefault: L(
-      'Sites, e-commerce, automação de WhatsApp e imagens aéreas com drone. MEI com Nota Fiscal.',
-      'Websites, e-commerce, WhatsApp automation and aerial drone imagery. Sole proprietor with official invoice.',
-      'Sitios, e-commerce, automatización de WhatsApp e imágenes aéreas con dron. MEI con factura oficial.',
+      'Sites, aplicativos mobile, e-commerce, automação de WhatsApp e imagens aéreas com drone. MEI com Nota Fiscal.',
+      'Websites, mobile apps, e-commerce, WhatsApp automation and aerial drone imagery. Sole proprietor with official invoice.',
+      'Sitios, aplicaciones móviles, e-commerce, automatización de WhatsApp e imágenes aéreas con dron. MEI con factura oficial.',
     ),
     geo: {
       region: 'BR-RS',
@@ -266,14 +266,14 @@ Para agilizar:
     paginas: {
       home: {
         title: L(
-          'Farias Digital | Landing Pages e Sites Profissionais',
-          'Farias Digital | Professional Landing Pages & Websites',
-          'Farias Digital | Landing Pages y Sitios Profesionales',
+          'Farias Digital | Sites, Apps e Experiências Digitais',
+          'Farias Digital | Websites, Apps & Digital Experiences',
+          'Farias Digital | Sitios, Apps y Experiencias Digitales',
         ),
         description: L(
-          'Landing pages a partir de R$ 300, sites institucionais, e-commerce e automação WhatsApp. MEI · Nota Fiscal · Orçamento grátis.',
-          'Landing pages from R$ 300, business websites, e-commerce and WhatsApp automation. Official invoice · Free quote.',
-          'Landing pages desde R$ 300, sitios institucionales, e-commerce y automatización WhatsApp. Factura oficial · Presupuesto gratis.',
+          'Sites, aplicativos mobile, landing pages, e-commerce e automação WhatsApp. MEI · Nota Fiscal · Orçamento grátis.',
+          'Websites, mobile apps, landing pages, e-commerce and WhatsApp automation. Official invoice · Free quote.',
+          'Sitios, aplicaciones móviles, landing pages, e-commerce y automatización WhatsApp. Factura oficial · Presupuesto gratis.',
         ),
       },
       pacotes: {

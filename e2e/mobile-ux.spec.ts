@@ -3,7 +3,16 @@ import { test, expect } from '@playwright/test'
 const MOBILE = { width: 390, height: 844 }
 const TABLET = { width: 768, height: 1024 }
 
-const KEY_ROUTES = ['/', '/pacotes/', '/portfolio/', '/faq/', '/sobre/']
+const ALL_ROUTES = [
+  '/',
+  '/pacotes/',
+  '/portfolio/',
+  '/faq/',
+  '/por-que-site/',
+  '/drone/',
+  '/computadores/',
+  '/sobre/',
+]
 
 async function assertNoHorizontalOverflow(page: import('@playwright/test').Page) {
   const overflow = await page.evaluate(() => {
@@ -31,11 +40,19 @@ test.describe('Mobile UX — 390px', () => {
     await page.setViewportSize(MOBILE)
   })
 
-  for (const route of KEY_ROUTES) {
+  for (const route of ALL_ROUTES) {
     test(`${route} loads without horizontal overflow`, async ({ page }) => {
       await page.goto(route, { waitUntil: 'domcontentloaded' })
       await expect(page.locator('header.site-header')).toBeVisible()
       await assertNoHorizontalOverflow(page)
+    })
+
+    test(`${route} main content is visible on mobile`, async ({ page }) => {
+      await page.goto(route, { waitUntil: 'domcontentloaded' })
+      await expect(page.locator('main')).toBeVisible()
+      const mainBox = await page.locator('main').boundingBox()
+      expect(mainBox?.width ?? 0).toBeLessThanOrEqual(MOBILE.width)
+      expect(mainBox?.width ?? 0).toBeGreaterThan(0)
     })
   }
 
@@ -137,6 +154,26 @@ test.describe('Mobile UX — 390px', () => {
     expect(second).not.toBeNull()
     if (first && second) {
       expect(second.y).toBeGreaterThan(first.y + first.height - 80)
+    }
+  })
+
+  test('home — app development highlight is visible', async ({ page }) => {
+    await page.goto('/')
+    const section = page.locator('#apps-mobile')
+    await section.scrollIntoViewIfNeeded()
+    await expect(section).toBeVisible()
+    await expect(section.getByRole('heading', { level: 2 })).toContainText(/aplicativos|apps|aplicaciones/i)
+    await expect(section.getByRole('link', { name: /app|aplicativo|aplicación/i })).toBeVisible()
+  })
+
+  test('footer links meet minimum touch target on mobile', async ({ page }) => {
+    await page.goto('/faq/')
+    const links = page.locator('.footer__links a')
+    const count = await links.count()
+    expect(count).toBeGreaterThan(0)
+    for (let i = 0; i < Math.min(count, 8); i++) {
+      const box = await links.nth(i).boundingBox()
+      expect(box?.height ?? 0, `footer link #${i + 1} height`).toBeGreaterThanOrEqual(42)
     }
   })
 })

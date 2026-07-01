@@ -50,7 +50,7 @@ export function SobrePage() {
   return (
     <>
       <PageMeta page="sobre" />
-      <section className="hero hero--compact">
+      <section className="hero hero--compact hero--page">
         <div className="container hero__grid">
           <div className="hero__content">
             <AnimatedSection>
@@ -84,7 +84,7 @@ export function SobrePage() {
         </div>
       </section>
 
-      <section className="section section--alt">
+      <section className="section section--light">
         <div className="container about-grid">
           <AnimatedSection direction="left" className="about-card">
             <img
@@ -159,7 +159,7 @@ export function SobrePage() {
         </div>
       </section>
 
-      <section className="section section--alt">
+      <section className="section section--light">
         <div className="container">
           <SectionHeader eyebrow={t(uiCopy.common.contactEyebrow)} title={t(uiCopy.common.talkToMe)} />
           <div className="service-grid">

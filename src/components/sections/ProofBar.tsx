@@ -8,10 +8,13 @@ export function ProofBar() {
       {config.proofBar.map((item) => (
         <div key={item.label} className="proof-bar__item">
           <span className="proof-bar__icon" aria-hidden="true">{item.icon}</span>
-          <span className="proof-bar__value">
-            {item.valor}
-            {item.sufixo}
-          </span>
+          {item.titulo && <span className="proof-bar__value">{item.titulo}</span>}
+          {item.valor != null && (
+            <span className="proof-bar__value">
+              {item.valor}
+              {item.sufixo}
+            </span>
+          )}
           <span className="proof-bar__label">{item.label}</span>
         </div>
       ))}

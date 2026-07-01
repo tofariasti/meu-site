@@ -38,16 +38,15 @@ export function HeroHome({
   const config = useHubConfig()
   const { t, pathFor } = useLocale()
   const reduced = useReducedMotion()
-  const [wordIndex, setWordIndex] = useState(0)
   const heroDemos = useMemo(() => filterHeroDemos(config.demos), [config.demos])
   const [demoIndex, setDemoIndex] = useState(() =>
     heroDemos.length ? Math.floor(Math.random() * heroDemos.length) : 0,
   )
 
   const resolvedLabel = label ?? t(uiCopy.hero.defaultLabel)
-  const resolvedTitleLines = titleLines ?? [t(uiCopy.hero.defaultTitle1), t(uiCopy.hero.rotateWords)[0]] as [string, string]
+  const resolvedTitleLines = titleLines ?? [t(uiCopy.hero.defaultTitle1), t(uiCopy.hero.defaultTitleAccent)] as [string, string]
   const resolvedSubtitle = subtitle ?? t(uiCopy.hero.defaultSubtitle)
-  const rotateWords = t(uiCopy.hero.rotateWords)
+  const serviceLine = t(uiCopy.hero.serviceLine)
   const activeDemo = heroDemos[demoIndex] ?? heroDemos[0]
   const demoSlug = activeDemo ? demoSlugFromUrl(activeDemo.url) : 'demo'
   const demoTypeLabels = useMemo(
@@ -64,14 +63,6 @@ export function HeroHome({
   const demoChips = activeDemo ? getHeroDemoChips(activeDemo, demoTypeLabels) : []
 
   useEffect(() => {
-    if (reduced || compact) return
-    const id = window.setInterval(() => {
-      setWordIndex((i) => (i + 1) % rotateWords.length)
-    }, 3200)
-    return () => window.clearInterval(id)
-  }, [compact, reduced, rotateWords.length])
-
-  useEffect(() => {
     if (reduced || compact || heroDemos.length < 2) return
     const id = window.setInterval(() => {
       setDemoIndex((i) => pickRandomDemoIndex(i, heroDemos.length))
@@ -79,10 +70,8 @@ export function HeroHome({
     return () => window.clearInterval(id)
   }, [compact, reduced, heroDemos.length])
 
-  const accentWord = compact ? resolvedTitleLines[1] : rotateWords[wordIndex]
-
   return (
-    <section className={`hero${compact ? ' hero--compact' : ' hero--home'}`}>
+    <section className={`hero${compact ? ' hero--compact hero--page' : ' hero--home'}`}>
       <div className={`container${showPreview && !compact ? ' hero__grid' : ''}`}>
         <div className="hero__content">
           <AnimatedSection>
@@ -95,28 +84,19 @@ export function HeroHome({
             <h1 className="hero__title">
               <span className="hero__title-line">{resolvedTitleLines[0]}</span>
               <span className="hero__title-line hero__title-line--accent">
-                {compact ? (
-                  accentWord
-                ) : (
-                  <>
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={accentWord}
-                        initial={reduced ? false : { opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={reduced ? undefined : { opacity: 0, y: -12 }}
-                        transition={{ duration: 0.35 }}
-                        className="text-rotate"
-                      >
-                        {accentWord}
-                      </motion.span>
-                    </AnimatePresence>
-                    {!reduced && <span className="text-rotate__cursor" aria-hidden="true" />}
-                  </>
-                )}
+                {resolvedTitleLines[1]}
               </span>
             </h1>
           </AnimatedSection>
+          {!compact && (
+            <AnimatedSection delay={2}>
+              <p className="hero__services-line" aria-label={t(uiCopy.common.services)}>
+                {serviceLine.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </p>
+            </AnimatedSection>
+          )}
           <AnimatedSection delay={2}>
             <p className="hero__subtitle">{resolvedSubtitle}</p>
           </AnimatedSection>
@@ -134,6 +114,10 @@ export function HeroHome({
                 <span className="hero-pricing-tag">
                   <span className="hero-pricing-tag__label">{t(uiCopy.hero.institutionalTag)}</span>
                   <span className="hero-pricing-tag__price">{t(uiCopy.hero.from1490)}</span>
+                </span>
+                <span className="hero-pricing-tag hero-pricing-tag--app">
+                  <span className="hero-pricing-tag__label">{t(uiCopy.hero.appTag)}</span>
+                  <span className="hero-pricing-tag__price">{t(uiCopy.hero.appPrice)}</span>
                 </span>
               </div>
             </AnimatedSection>
@@ -166,39 +150,54 @@ export function HeroHome({
               <span className="hero-orbit__ring hero-orbit__ring--2" />
             </div>
             <div className="hero-visual__glow" />
-            <div className="browser-preview browser-preview--glow">
-              <div className="browser-preview__bar">
-                <span className="hero-mockup__dot hero-mockup__dot--r" />
-                <span className="hero-mockup__dot hero-mockup__dot--y" />
-                <span className="hero-mockup__dot hero-mockup__dot--g" />
-                <span className="browser-preview__url">
+            <div className="hero-devices">
+              <div className="browser-preview browser-preview--glow">
+                <div className="browser-preview__bar">
+                  <span className="hero-mockup__dot hero-mockup__dot--r" />
+                  <span className="hero-mockup__dot hero-mockup__dot--y" />
+                  <span className="hero-mockup__dot hero-mockup__dot--g" />
+                  <span className="browser-preview__url">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={demoSlug}
+                        initial={reduced ? false : { opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={reduced ? undefined : { opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {demoSlug}.demo · {config.dominioHost}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                </div>
+                <div className="browser-preview__screen">
                   <AnimatePresence mode="wait">
-                    <motion.span
-                      key={demoSlug}
+                    <motion.iframe
+                      key={activeDemo.url}
+                      src={activeDemo.url}
+                      title={`Demo ${activeDemo.titulo}`}
+                      loading="lazy"
+                      tabIndex={-1}
                       initial={reduced ? false : { opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={reduced ? undefined : { opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {demoSlug}.demo · {config.dominioHost}
-                    </motion.span>
+                      transition={{ duration: 0.35 }}
+                    />
                   </AnimatePresence>
-                </span>
+                </div>
               </div>
-              <div className="browser-preview__screen">
-                <AnimatePresence mode="wait">
-                  <motion.iframe
-                    key={activeDemo.url}
-                    src={activeDemo.url}
-                    title={`Demo ${activeDemo.titulo}`}
-                    loading="lazy"
-                    tabIndex={-1}
-                    initial={reduced ? false : { opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={reduced ? undefined : { opacity: 0 }}
-                    transition={{ duration: 0.35 }}
-                  />
-                </AnimatePresence>
+              <div className="hero-phone" aria-hidden="true">
+                <div className="hero-phone__notch" />
+                <div className="hero-phone__screen">
+                  <div className="hero-phone__header" />
+                  <div className="hero-phone__line hero-phone__line--mid" />
+                  <div className="hero-phone__line hero-phone__line--short" />
+                  <div className="hero-phone__line" />
+                  <div className="hero-phone__card">
+                    <div className="hero-phone__card-icon" />
+                    <div className="hero-phone__card-label">{t(uiCopy.hero.phoneAppLabel)}</div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="hero-demo-caption" aria-live="polite">

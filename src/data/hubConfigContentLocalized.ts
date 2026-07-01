@@ -844,12 +844,10 @@ export const demosLocalized = [
 ]
 
 export const proofBarLocalized = [
-  { valor: 10, sufixo: '+', label: L('Anos em sistemas web corporativos', 'Years in corporate web systems', 'Años en sistemas web corporativos'), icon: '◆' },
-  { valor: 40, sufixo: '+', label: L('Modelos por segmento disponíveis', 'Templates by industry available', 'Modelos por segmento disponibles'), icon: '◆' },
-  { valor: 100, sufixo: '%', label: L('Atendimento direto com o desenvolvedor', 'Direct contact with the developer', 'Atención directa con el desarrollador'), icon: '◆' },
-  { valor: 24, sufixo: 'h', label: L('Retorno no orçamento', 'Quote reply time', 'Respuesta en el presupuesto'), icon: '◆' },
-  { valor: 70, sufixo: '%', label: L('Dos acessos vêm do celular', 'Of visits come from mobile', 'De los accesos vienen del celular'), icon: '◆' },
-  { valor: 5, sufixo: '+', label: L('Dias úteis para landing pronta', 'Business days for landing delivery', 'Días hábiles para landing lista'), icon: '◆' },
+  { titulo: L('Entrega ágil', 'Fast delivery', 'Entrega ágil'), label: L('Prazo definido e processo eficiente — você sabe o que vai receber e quando.', 'Defined timeline and efficient process — you know what you will get and when.', 'Plazo definido y proceso eficiente — sabe qué recibirá y cuándo.'), icon: '⚡' },
+  { titulo: L('Design moderno', 'Modern design', 'Diseño moderno'), label: L('Layouts profissionais que transmitem credibilidade e destacam sua marca.', 'Professional layouts that build credibility and highlight your brand.', 'Layouts profesionales que transmiten credibilidad y destacan su marca.'), icon: '◆' },
+  { titulo: L('Foco em resultado', 'Results-driven', 'Enfoque en resultados'), label: L('Conversão, SEO e presença digital pensados para gerar contato e vendas.', 'Conversion, SEO and digital presence designed to generate leads and sales.', 'Conversión, SEO y presencia digital pensados para generar contacto y ventas.'), icon: '◎' },
+  { titulo: L('Suporte humano', 'Human support', 'Soporte humano'), label: L('Atendimento direto com quem desenvolveu seu projeto — sem robôs.', 'Direct support from who built your project — no bots.', 'Atención directa con quien desarrolló su proyecto — sin robots.'), icon: '☎' },
 ]
 
 export const testimonialsLocalized = [
@@ -944,6 +942,7 @@ export const intentItemsLocalized = [
 
 export const servicosLocalized = [
   { id: 'landing-painel', titulo: L('Landing + Painel', 'Landing + Panel', 'Landing + Panel'), descricao: L('Site que você mesma atualiza — preços, textos e fotos direto do celular.', 'A website you update yourself — prices, copy and photos from your phone.', 'Sitio que usted misma actualiza — precios, textos y fotos directo del celular.'), preco: L('a partir de R$ 590', 'from R$ 590', 'desde R$ 590'), href: '/pacotes/#pacotes' },
+  { id: 'aplicativos', titulo: L('Aplicativos mobile', 'Mobile apps', 'Aplicaciones móviles'), descricao: L('Apps para iOS e Android — catálogos, agendamento, painéis e soluções sob medida para o seu negócio.', 'iOS and Android apps — catalogs, booking, admin panels and custom solutions for your business.', 'Apps para iOS y Android — catálogos, agendamiento, paneles y soluciones a medida para su negocio.'), preco: L('sob medida', 'custom', 'a medida'), wa: 'site' },
   { id: 'landing', titulo: L('Landing Pages', 'Landing Pages', 'Landing Pages'), descricao: L('Páginas estratégicas para captar leads e vender mais pelo WhatsApp.', 'Strategic pages to capture leads and sell more via WhatsApp.', 'Páginas estratégicas para captar leads y vender más por WhatsApp.'), preco: L('a partir de R$ 300', 'from R$ 300', 'desde R$ 300'), href: '/portfolio/' },
   { id: 'institucional', titulo: L('Sites institucionais', 'Business websites', 'Sitios institucionales'), descricao: L('Presença profissional com múltiplas seções, SEO e credibilidade.', 'Professional presence with multiple sections, SEO and credibility.', 'Presencia profesional con múltiples secciones, SEO y credibilidad.'), preco: L('a partir de R$ 1.490', 'from R$ 1,490', 'desde R$ 1.490'), href: '/pacotes/#pacotes' },
   { id: 'ecommerce', titulo: L('E-commerce', 'E-commerce', 'E-commerce'), descricao: L('Loja virtual, catálogo de produtos e pedidos pelo WhatsApp ou pagamento online.', 'Online store, product catalog and orders via WhatsApp or online payment.', 'Tienda virtual, catálogo de productos y pedidos por WhatsApp o pago online.'), preco: L('a partir de R$ 2.990', 'from R$ 2,990', 'desde R$ 2.990'), href: '/pacotes/#pacotes' },

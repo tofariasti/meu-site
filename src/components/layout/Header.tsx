@@ -5,6 +5,7 @@ import { useLocale } from '../../i18n/LocaleContext'
 import { LOCALES, type Locale } from '../../i18n/types'
 import { uiCopy } from '../../data/uiCopy'
 import { WhatsAppButton } from '../ui/WhatsAppButton'
+import { SocialLinks } from '../ui/SocialLinks'
 
 function Logo() {
   const config = useHubConfig()
@@ -95,10 +96,10 @@ export function Header() {
           </ul>
         </nav>
         <div className="site-header__actions">
+          <SocialLinks className="site-header__social" />
           <LangSwitcher />
-          <WhatsAppButton waKey="geral" className="btn btn--primary site-header__whatsapp">
-            {t(uiCopy.cta.chat)}
-            <span className="btn__arrow" aria-hidden="true">→</span>
+          <WhatsAppButton waKey="geral" className="btn btn--whatsapp btn--sm site-header__whatsapp">
+            {t(uiCopy.cta.chatHeader)}
           </WhatsAppButton>
           <button
             type="button"
@@ -143,6 +144,7 @@ export function Header() {
           <span className="btn__arrow" aria-hidden="true">→</span>
         </WhatsAppButton>
         <div className="mobile-nav__lang">
+          <SocialLinks />
           <LangSwitcher onSelect={() => setMobileOpen(false)} />
         </div>
       </div>

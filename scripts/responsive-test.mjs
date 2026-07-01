@@ -7,9 +7,9 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT = join(ROOT, 'test-results', 'responsive');
-const BASE = process.env.TEST_BASE_URL || 'http://localhost:8888';
+const BASE = process.env.TEST_BASE_URL || 'http://127.0.0.1:8765';
 
-const VIEWPORTS = [
+const VIEWPORTS_ALL = [
   { name: 'iphone-se', width: 375, height: 667, isMobile: true },
   { name: 'iphone-14', width: 390, height: 844, isMobile: true },
   { name: 'iphone-14-pro-max', width: 430, height: 932, isMobile: true },
@@ -20,10 +20,18 @@ const VIEWPORTS = [
   { name: 'desktop-hd', width: 1440, height: 900, isMobile: false },
 ];
 
+const VIEWPORTS = process.env.MOBILE_ONLY === '1'
+  ? VIEWPORTS_ALL.filter((v) => v.isMobile && v.width <= 430)
+  : VIEWPORTS_ALL;
+
 const PAGES = [
   { path: '/', slug: 'home' },
   { path: '/pacotes/', slug: 'pacotes' },
+  { path: '/portfolio/', slug: 'portfolio' },
+  { path: '/faq/', slug: 'faq' },
+  { path: '/por-que-site/', slug: 'por-que-site' },
   { path: '/drone/', slug: 'drone' },
+  { path: '/computadores/', slug: 'computadores' },
   { path: '/sobre/', slug: 'sobre' },
 ];
 
@@ -101,15 +109,15 @@ async function auditPage(page, viewport) {
 
 async function testMobileNav(page) {
   const issues = [];
-  const toggle = page.locator('[data-nav-toggle]');
+  const toggle = page.locator('.nav-toggle');
   if (!(await toggle.isVisible())) return issues;
 
   await toggle.click();
   await page.waitForTimeout(200);
-  const open = await page.locator('[data-mobile-nav]').evaluate((el) => el.classList.contains('is-open'));
+  const open = await page.locator('#mobile-nav').evaluate((el) => el.classList.contains('is-open'));
   if (!open) issues.push({ type: 'mobile-nav', detail: 'Menu não abriu' });
 
-  const links = page.locator('[data-mobile-nav] a');
+  const links = page.locator('#mobile-nav a');
   const count = await links.count();
   for (let i = 0; i < Math.min(count, 3); i++) {
     const box = await links.nth(i).boundingBox();
